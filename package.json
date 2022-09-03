@@ -6,14 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "migrate": "dotenv -e .env.development.local -- npx prisma migrate dev"
+    "lint": "next lint"
   },
   "dependencies": {
     "aws-sdk": "^2.1209.0",
     "axios": "^0.27.2",
     "daisyui": "^2.24.0",
-    "dotenv-cli": "^6.0.0",
     "form-data": "^4.0.0",
     "formidable": "^2.0.1",
     "fs": "^0.0.1-security",
