@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PostTypes {
+  TWEET
+  RETWEET
+  MEDIA
+  REPLY
+}
+
+enum ActionTypes {
+  LIKE
+  BOOKMARK
+  FOLLOW
+}
+
+model User {
+  id            String         @unique @default(uuid())
+  userName      String?        @unique
+  name          String
+  email         String         @unique
+  passwordHash  String
+  salt          String
+  bio           String?        @db.VarChar(280)
+  avatarImg     String?        @default("https://unit-2-cardify.s3.ap-northeast-1.amazonaws.com/asdfasdee-avatar.jpg")
+  headerImg     String?
+  location      String?
+  website       String?
+  dateOfBirth   DateTime
+  joinDate      DateTime       @default(now())
+  posts         Post[]
+  interactions  Interaction[]
+  notifications Notification[]
+}
+
+model Post {
+  id           Int           @id @default(autoincrement())
+  userId       String
+  postId       Int?
+  content      String?       @db.VarChar(280)
+  mediaUrl     String?
+  date         DateTime      @default(now())
+  editDate     DateTime?
+  postType     PostTypes
+  interactions Interaction[]
+  user         User          @relation(fields: [userId], references: [id])
+}
+
+model Interaction {
+  id                Int         @id @default(autoincrement())
+  postId            Int?
+  postUserId        String?
+  interactionUserId String
+  date              DateTime    @default(now())
+  actionType        ActionTypes
+  user              User        @relation(fields: [interactionUserId], references: [id])
+  post              Post?       @relation(fields: [postId], references: [id])
+}
+
+model Notification {
+  id       Int       @id @default(autoincrement())
+  userId   String
+  content  String
+  sendDate DateTime  @default(now())
+  readDate DateTime?
+  received Boolean   @default(false)
+  user     User      @relation(fields: [userId], references: [id])
+}
