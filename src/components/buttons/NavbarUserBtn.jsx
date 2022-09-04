@@ -10,7 +10,7 @@ const NavbarUserBtn = () => {
   const { profile, newProfile } = userProfile()
 
   const handleLogOut = async () => {
-    await axios.delete('http://localhost:3000/api/auth/logout')
+    await axios.delete('/api/auth/logout')
     await newProfile('/api/my/profile')
     await router.push('/')
   }
