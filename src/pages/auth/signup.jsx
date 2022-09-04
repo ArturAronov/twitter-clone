@@ -66,12 +66,15 @@ const SignUp = () => {
     }
   }
 
-  const handleSubmit = () => axios.post('http://localhost:3000/api/auth/signup', data)
-    .then(() => router.push('/'))
-    .catch((err) => {
-      setErrorMessage(Object.values(err.response.data)[0])
-    })
+  const handleSubmit = () => {
+    const jsonData = JSON.stringify(data)
 
+    axios.post('http://localhost:3000/api/auth/signup', jsonData)
+        .then(() => router.push('/'))
+        .catch((err) => {
+          setErrorMessage(Object.values(err.response.data)[0])
+    })
+  }
   useEffect(() => {
     // Validate that the date entered isn't the future date
     if (date?.day && date?.month && date?.year) {
