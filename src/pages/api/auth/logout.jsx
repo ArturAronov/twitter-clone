@@ -1,5 +1,5 @@
 import nextConnect from 'next-connect'
-import auth from '../../../controllers/_middlewares/auth'
+import auth from '../../../../prisma/hooks/controllers/_middlewares/auth'
 
 const handler = nextConnect()
 

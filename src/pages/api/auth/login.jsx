@@ -5,9 +5,9 @@ import _ from 'lodash'
 import crypto from 'crypto'
 import nextConnect from 'next-connect'
 
-import auth from '../../../controllers/_middlewares/auth'
-import handleErrors from '../../../controllers/_helpers/handleErrors'
-import prisma from '../../../controllers/_helpers/prisma'
+import auth from '../../../../prisma/hooks/controllers/_middlewares/auth'
+import handleErrors from '../../../../prisma/hooks/controllers/_helpers/handleErrors'
+import prisma from '../../../../prisma/hooks/controllers/_helpers/prisma'
 
 const handler = nextConnect()
 
