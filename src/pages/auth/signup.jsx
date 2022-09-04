@@ -67,12 +67,7 @@ const SignUp = () => {
   }
 
   const handleSubmit = () => {
-    const jsonData = JSON.stringify(data)
-    console.log('data ', data)
-    console.log('JSON data ', jsonData)
-
-
-    axios.post('/api/auth/signup', jsonData)
+    axios.post('/api/auth/signup', data)
         .then(() => router.push('/'))
         .catch((err) => {
           setErrorMessage(Object.values(err.response.data)[0])
