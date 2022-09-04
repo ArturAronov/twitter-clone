@@ -15,7 +15,7 @@ const Login = () => {
     })
   }
 
-  const handleSubmit = () => axios.post('http://localhost:3000/api/auth/login', data)
+  const handleSubmit = () => axios.post('/api/auth/login', data)
     .then(() => router.push('/'))
     .catch((err) => {
       if (err?.response?.data?.email) {

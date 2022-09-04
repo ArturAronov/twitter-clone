@@ -68,6 +68,9 @@ const SignUp = () => {
 
   const handleSubmit = () => {
     const jsonData = JSON.stringify(data)
+    console.log('data ', data)
+    console.log('JSON data ', jsonData)
+
 
     axios.post('http://localhost:3000/api/auth/signup', jsonData)
         .then(() => router.push('/'))
