@@ -8,6 +8,7 @@ const dirname = `${currFilePath}/../../../tmp`
 if (!fs.existsSync(dirname)) fs.mkdirSync(dirname)
 
 const parseData = (req, res, next) => {
+  console.log(req.body)
   const form = formidable({ uploadDir: dirname, keepExtensions: true, multiples: true })
 
   if (req?.headers?.['content-type'].includes('multipart/form-data')) {
