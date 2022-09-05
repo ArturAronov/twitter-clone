@@ -7,7 +7,7 @@ import { URL } from 'url'
 
 const currFilePath = new URL(import.meta.url).pathname.split('/').slice(0, -1).join('/')
 // const dirname = `${currFilePath}/../../../tmp`
-const dirname = `../../../tmp`
+const dirname = `../../tmp`
 // if (!fs.existsSync(dirname)) fs.mkdirSync(dirname)
 
 const parseData = (req, res, next) => {
