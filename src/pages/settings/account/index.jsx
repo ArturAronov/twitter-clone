@@ -26,7 +26,7 @@ const SettingsAccount = () => {
     const imgSubmitData = new FormData()
 
     imgSubmitData.append(key, img.target.files[0])
-    return axios.put('http://localhost:3000/api/my/profile/update', imgSubmitData)
+    return axios.put('/api/my/profile/update', imgSubmitData)
       .then(() => router.push('/settings/account')).then(() => newProfile('/api/my/profile'))
   }
 
@@ -47,7 +47,7 @@ const SettingsAccount = () => {
       submitFormData.append(i, submitData[i])
     }
 
-    return axios.put('http://localhost:3000/api/my/profile/update', submitFormData)
+    return axios.put('/api/my/profile/update', submitFormData)
       .then(() => router.push('/settings'))
       .catch((err) => {
         setErrorMessage(Object.values(Object.values(err.response.data)[0]))

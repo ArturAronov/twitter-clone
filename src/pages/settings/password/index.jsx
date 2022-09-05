@@ -16,17 +16,21 @@ const SettingsPassword = () => {
     })
   }
 
-  let submitFormData = new FormData()
 
-  for (let i in submitData) {
-    submitFormData.append(i, submitData[i])
+
+  const handleSubmit = () => {
+    let submitFormData = new FormData()
+
+    for (let i in submitData) {
+      submitFormData.append(i, submitData[i])
+    }
+
+    axios.put('/api/my/profile/update', submitFormData)
+      .then(() => router.push('/settings'))
+      .catch((err) => {
+        setErrorMessage(Object.values(err.response.data)[0])
+      })
   }
-
-  const handleSubmit = () => axios.put('http://localhost:3000/api/my/profile/update', submitFormData)
-    .then(() => router.push('/settings'))
-    .catch((err) => {
-      setErrorMessage(Object.values(err.response.data)[0])
-    })
 
   return (
     <div className="w-full mt-10">
