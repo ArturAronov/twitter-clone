@@ -32,17 +32,16 @@ const uploadFileAsync = async (user, data, { files }) => {
         Body: fileContent
       }
 
-      console.log(params)
-      console.log(fileContent)
       // Replace the body file with a url
       _.set(data, key, `https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${file.newFilename}`)
 
       // Uploading files to the bucket and push promise for Promise.all
       promises.push(s3.upload(params).promise().then((uploadedFile) => {
         fs.unlinkSync(file.filepath)
+
         return uploadedFile.Location
       }).catch((err) => {
-        console.log('test123', err) // eslint-disable-line
+        console.log(err) // eslint-disable-line
         fs.unlinkSync(file.filepath)
         return err
       }))
