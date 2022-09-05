@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import FormData from "form-data"
 
 import BTN_CLASS from '../../../globalVars/btn_class'
 
