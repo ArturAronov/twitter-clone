@@ -107,7 +107,7 @@ const SettingsAccount = () => {
 
         profile?.id
         && (
-          <div className="w-full flex flex-col justify-center mb-5 static">
+          <div className="w-full flex flex-col justify-center mb-5 static overflow-hidden">
             <div className="flex justify-center mt-5 lg:mt-10 static">
               <div className="w-3/4 flex justify-center backdrop-opacity-100 static max-h-[200px] object-cover">
                 <label
