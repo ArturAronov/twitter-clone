@@ -32,6 +32,8 @@ const uploadFileAsync = async (user, data, { files }) => {
         Body: fileContent
       }
 
+      console.log(params)
+      console.log(fileContent)
       // Replace the body file with a url
       _.set(data, key, `https://${process.env.S3_BUCKET}.s3.${process.env.S3_REGION}.amazonaws.com/${file.newFilename}`)
 

@@ -27,7 +27,7 @@ const SettingsAccount = () => {
 
     imgSubmitData.append(key, img.target.files[0])
     return axios.put('/api/my/profile/update', imgSubmitData)
-      .then(() => router.push('/settings/account')).then(() => newProfile('/api/my/profile'))
+      .then(() => router.push('/settings/account')).then(() => newProfile())
   }
 
   const handleBioInput = (e) => {
