@@ -3,12 +3,18 @@ import _ from 'lodash'
 import fs from 'fs'
 import { URL } from 'url'
 
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
+
 const currFilePath = new URL(import.meta.url).pathname.split('/').slice(0, -1).join('/')
-const dirname = `${currFilePath}/../../tmp`
+const dirname = `${currFilePath}/../../../tmp`
+console.log(dirname)
 if (!fs.existsSync(dirname)) fs.mkdirSync(dirname)
 
 const parseData = (req, res, next) => {
-  console.log(req.body)
   const form = formidable({ uploadDir: dirname, keepExtensions: true, multiples: true })
 
   if (req?.headers?.['content-type'].includes('multipart/form-data')) {
