@@ -12,7 +12,7 @@ export const config = {
 const currFilePath = new URL(import.meta.url).pathname.split('/').slice(0, -1).join('/')
 const dirname = `${currFilePath}/../../../tmp`
 console.log(dirname)
-if (!fs.existsSync(dirname)) fs.mkdirSync(dirname)
+// if (!fs.existsSync(dirname)) fs.mkdirSync(dirname)
 
 const parseData = (req, res, next) => {
   const form = formidable({ uploadDir: dirname, keepExtensions: true, multiples: true })
