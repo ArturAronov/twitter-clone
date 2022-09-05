@@ -3,13 +3,14 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import moment from 'moment'
 
+import useProfile from '../../hooks/useProfile'
 import BTN_CLASS from '../../globalVars/btn_class'
 
 const SignUp = () => {
+  const { newProfile } = useProfile()
   const [data, setData] = useState({})
   const [date, setDate] = useState({})
   const [dateErrorMessage, setDateErrorMessage] = useState({})
-  const [test, setTest] = useState(0)
   const [errorMessage, setErrorMessage] = useState('')
   const router = useRouter()
 
@@ -69,6 +70,7 @@ const SignUp = () => {
   const handleSubmit = () => {
     axios.post('/api/auth/signup', data)
         .then(() => router.push('/'))
+        .then(() => newProfile())
         .catch((err) => {
           setErrorMessage(Object.values(err.response.data)[0])
     })

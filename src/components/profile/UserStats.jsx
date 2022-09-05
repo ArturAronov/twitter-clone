@@ -1,7 +1,7 @@
-import userProfile from '../../hooks/useProfile'
+import useProfile from '../../hooks/useProfile'
 
 const UserStats = () => {
-  const { profile } = userProfile()
+  const { profile } = useProfile()
 
   return (
     <div className="relative p-2">

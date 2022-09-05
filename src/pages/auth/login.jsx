@@ -2,11 +2,13 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import axios from 'axios'
 
+import useProfile from '../../hooks/useProfile'
 import BTN_CLASS from '../../globalVars/btn_class'
 
 const Login = () => {
   const [data, setData] = useState({})
   const [errorMessage, setErrorMessage] = useState({})
+  const { newProfile } = useProfile()
   const router = useRouter()
   const handleInput = (e, input) => {
     setData({
@@ -17,6 +19,7 @@ const Login = () => {
 
   const handleSubmit = () => axios.post('/api/auth/login', data)
     .then(() => router.push('/'))
+    .then(() => newProfile())
     .catch((err) => {
       if (err?.response?.data?.email) {
         setErrorMessage({

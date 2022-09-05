@@ -1,7 +1,7 @@
 import useSWR from 'swr'
 import axios from 'axios'
 
-const userProfile = () => {
+const useProfile = () => {
   const fetcher = (url) => axios.get(url).then((res) => res.data)
   const { data: profile, mutate: newProfile } = useSWR('/api/my/profile', fetcher)
 
@@ -11,4 +11,4 @@ const userProfile = () => {
   }
 }
 
-export default userProfile
+export default useProfile

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
 import userInfo from '../hooks/useInfo'
-import userProfile from '../hooks/useProfile'
+import useProfile from '../hooks/useProfile'
 import NavbarUserBtn from './buttons/NavbarUserBtn'
 
 import HeaderTitle from './HeaderTitle'
@@ -11,7 +11,7 @@ const Header = () => {
   const [userName, setUserName] = useState('')
   const [headerTitle, setHeaderTitle] = useState('')
 
-  const { profile } = userProfile()
+  const { profile } = useProfile()
   const { user } = userInfo(userName)
   const { asPath } = useRouter()
   const { query: { slug } } = useRouter()
