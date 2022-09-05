@@ -66,7 +66,7 @@ handler
           req.session.user = { id: user.id }
           await req.session.save()
 
-          return res.status(200).json(user)
+          return res.status(200).json({ success: true, message: 'successfully logged in' })
         })(req, res)
       }
 
