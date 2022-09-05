@@ -97,11 +97,14 @@ const SettingsAccount = () => {
     } else {
       setHeaderImage(<div className='h-[200px] w-3/4 bg-zinc-800'></div>)
     }
+
+
   }, [bio, city, selectedCityCountry, profile])
 
   return (
     <>
       {
+
         profile?.id
         && (
           <div className="w-full flex flex-col justify-center mb-5 static">
@@ -134,22 +137,35 @@ const SettingsAccount = () => {
               </div>
             </div>
             <div className="flex flex-col hero-content mt-5">
-              <input
-                type="text"
-                placeholder={profile.userName || 'User Name'}
-                className="input input-bordered w-full max-w-xs rounded-md bg-zinc-1000 border border-zinc-700 m-1 text-zinc-0"
-                onChange={(e, userName) => handleChanges(e, 'userName')}
-              />
-              <input
-                type="text"
-                placeholder={profile.website || 'Website'}
-                className="input input-bordered w-full max-w-xs rounded-md bg-zinc-1000 border border-zinc-700 m-1 text-zinc-0"
-                onChange={(e, website) => handleChanges(e, 'website')}
-              />
-              <div className="w-full max-w-xs m-1 flex flex-row hero-content">
+              <div className='w-80 mt-2'>
+                <label className="label flex flex-row w-content">
+                  <span className="label-text text-sm text-zinc-500 pl-1">Username
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  className="input input-bordered w-full max-w-xs rounded-md bg-zinc-1000 border border-zinc-700 m-1 text-zinc-0"
+                  onChange={(e, userName) => handleChanges(e, 'userName')}
+                />
+              </div>
+              <div className='w-80 mt-2'>
+                <label className="label flex flex-row w-content">
+                  <span className="label-text text-sm text-zinc-500 pl-1">Website
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  className="input input-bordered w-full max-w-xs rounded-md bg-zinc-1000 border border-zinc-700 m-1 text-zinc-0"
+                  onChange={(e, website) => handleChanges(e, 'website')}
+                />
+              </div>
+              <label className="label w-80 mt-2 ">
+                <span className="label-text text-sm text-zinc-500 pl-1">Bio
+                </span>
+              </label>
+              <div className="w-80 max-w-xs m-1 ml-3 flex flex-row hero-content">
                 <textarea
                   value={bio}
-                  placeholder={profile.bio || 'Bio'}
                   className="textarea w-full max-w-xs bg-zinc-1000 overflow-hidden h-full text-zinc-0 border border-zinc-700 rounded-md"
                   onChange={(e, bio) => {
                     handleBioInput(e)
@@ -158,12 +174,15 @@ const SettingsAccount = () => {
                 />
                 {bio.length > 0 && <TweetLengthProgress percent={percent} />}
               </div>
-              <div className="w-80 m-1 hero-content">
+              <div className="w-80 m-1 mt-2">
+                <label className="label flex flex-row w-content">
+                  <span className="label-text text-sm text-zinc-500 pl-1">Location
+                  </span>
+                </label>
                 <div className="dropdown">
                   <input
                     tabIndex="0"
                     type="text"
-                    placeholder={profile.location !== null ? profile.location : 'City'}
                     value={selectedCityCountry?.city ? `${selectedCityCountry.city} (${selectedCityCountry.country})` : city}
                     className="input input-bordered w-80 rounded-md bg-zinc-1000 border border-zinc-700 m-1 text-zinc-0"
                     onChange={(e) => setCity(e.target.value)}
