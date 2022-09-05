@@ -81,7 +81,7 @@ const SettingsAccount = () => {
       url: 'https://spott.p.rapidapi.com/places/autocomplete',
       params: { limit: '10', skip: '0', q: city, type: 'CITY' },
       headers: {
-        'X-RapidAPI-Key': process.env.GEOLOCATION_API,
+        'X-RapidAPI-Key': process.env.NEXT_PUBLIC_GEOLOCATION_API,
         'X-RapidAPI-Host': 'spott.p.rapidapi.com'
       }
     }
