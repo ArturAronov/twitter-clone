@@ -38,7 +38,8 @@ handler
   .put(async (req, res) => {
     try {
       const postId = parseInt(req.body.postId)
-      const userId = req.session.user.id
+      const postUserId = req.session.user.id
+
       const {
         actionType,
         interactionUserId
