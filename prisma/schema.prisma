@@ -24,22 +24,23 @@ enum ActionTypes {
 }
 
 model User {
-  id            String         @unique @default(uuid())
-  userName      String?        @unique
-  name          String
-  email         String         @unique
-  passwordHash  String
-  salt          String
-  bio           String?        @db.VarChar(280)
-  avatarImg     String?        @default("https://unit-2-cardify.s3.ap-northeast-1.amazonaws.com/twitter-avatar.jpg")
-  headerImg     String?
-  location      String?
-  website       String?
-  dateOfBirth   DateTime
-  joinDate      DateTime       @default(now())
-  posts         Post[]
-  interactions  Interaction[]
-  notifications Notification[]
+  id              String         @unique @default(uuid())
+  userName        String?        @unique
+  name            String
+  email           String         @unique
+  passwordHash    String
+  salt            String
+  bio             String?        @db.VarChar(280)
+  avatarImg       String?        @default("https://unit-2-cardify.s3.ap-northeast-1.amazonaws.com/twitter-avatar.jpg")
+  headerImg       String?
+  location        String?
+  website         String?
+  dateOfBirth     DateTime
+  joinDate        DateTime       @default(now())
+  posts           Post[]
+  postUser        Interaction[]  @relation("postUser")
+  interactionUser Interaction[]  @relation("interactionUser")
+  notifications   Notification[]
 }
 
 model Post {
@@ -58,11 +59,12 @@ model Post {
 model Interaction {
   id                Int         @id @default(autoincrement())
   postId            Int?
-  postUserId        String?
+  postUserId        String
   interactionUserId String
   date              DateTime    @default(now())
   actionType        ActionTypes
-  user              User        @relation(fields: [interactionUserId], references: [id])
+  postUser          User        @relation("postUser", fields: [postUserId], references: [id])
+  interactionUser   User        @relation("interactionUser", fields: [interactionUserId], references: [id])
   post              Post?       @relation(fields: [postId], references: [id])
 }
 
