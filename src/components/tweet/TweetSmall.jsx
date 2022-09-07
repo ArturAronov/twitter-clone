@@ -11,30 +11,42 @@ import BookmarkBtn from '../buttons/BookmarkBtn'
 
 import TinyRetweet from './TinyRetweet'
 
-const TweetSmall = (data) => {
+const TweetSmall = (props) => {
   const [dateFormat, setDateFormat] = useState()
   const [postType, setPostType] = useState()
+  const [postFeed, setPostFeed] = useState()
 
   const {
     tweetData,
     userData
-  } = data
+  } = props
 
   useEffect(() => {
-    const currentDateInt = parseInt(moment(new Date()).format('YYYYMMDD'))
-    const tweetDateInt = parseInt(moment(tweetData.date).format('YYYYMMDD'))
-
-    if (currentDateInt - tweetDateInt <= 30) {
-      setDateFormat(moment(tweetData.date).fromNow())
-    } else if (currentDateInt - tweetDateInt <= 365) {
-      setDateFormat(moment(tweetData.date).format('MMM D'))
+    if(tweetData?.actionType) {
+      setPostFeed(tweetData.post)
     } else {
-      setDateFormat(moment(tweetData.date).format('MMM D'))
+      setPostFeed(tweetData)
     }
-  }, [tweetData])
+  }, [])
+
+  useEffect(() => {
+    if(postFeed) {
+      const currentDateInt = parseInt(moment(new Date()).format('YYYYMMDD'))
+      const tweetDateInt = parseInt(moment(postFeed.date).format('YYYYMMDD'))
+
+      if (currentDateInt - tweetDateInt <= 30) {
+        setDateFormat(moment(postFeed.date).fromNow())
+      } else if (currentDateInt - tweetDateInt <= 365) {
+        setDateFormat(moment(postFeed.date).format('MMM D'))
+      } else {
+        setDateFormat(moment(postFeed.date).format('MMM D'))
+      }
+    }
+  }, [postFeed])
 
   return (
     <div className="flex flex-row py-2 hover:bg-zinc-900 outline outline-1 outline-zinc-700 mr-[1px] mb-[1px] px-5">
+    {console.log(props)}
       <img src={userData.avatarImg} className="w-10 h-10 object-cover rounded-full m-2 cursor-pointer" onClick={() => router.push(`/${userData.userName}`)} />
       <div className="w-full  cursor-pointer">
         <div onClick={() => router.push(`/tweet/${tweetData.id}`)}>
@@ -54,12 +66,12 @@ const TweetSmall = (data) => {
               </div>
             } */}
             <div>
-              { tweetData.content }
+              { postFeed?.content && postFeed.content }
             </div>
-            { data?.tweetData?.mediaUrl
+            { props?.tweetData?.mediaUrl
               && (
               <div className="hero-content py-3">
-                <img src={data.tweetData.mediaUrl} />
+                <img src={props.tweetData.mediaUrl} />
               </div>
               )}
 

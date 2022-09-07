@@ -94,8 +94,16 @@ export const getServerSideProps = async (context) => {
   } else if (page === 'likes') {
     APIdata = await prisma.interaction.findMany({
       where: {
-        userId: user.id,
+        postUserId: user.id,
         actionType: 'LIKE'
+      },
+      include: {
+        post: {
+          select: {
+            content: true,
+            date: true,
+          }
+        }
       },
       orderBy: {
         date: 'desc'
