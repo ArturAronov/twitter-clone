@@ -19,13 +19,13 @@ handler
           interactionUserId: profile.id
         },
         include: {
-          user: {
+          interactionUser: {
             select: {
               id: true,
               name: true,
               userName: true,
-              bio: true,
-              avatarImg: true
+              avatarImg: true,
+              bio: true
             }
           }
         }

@@ -7,7 +7,6 @@ const handler = nextConnect()
 handler
   .get(async (req, res) => {
     try {
-      console.log(req.query)
       const profile = await prisma.user.findFirst({
         where: {
           userName: req.query.username
@@ -16,17 +15,17 @@ handler
 
       const getFollowers = await prisma.interaction.findMany({
         where: {
-          actionType: 'FOLLOW',
-          interactionUserId: profile.id
+          postUserId: profile.id,
+          actionType: 'FOLLOW'
         },
         include: {
-          user: {
+          interactionUser: {
             select: {
               id: true,
               name: true,
               userName: true,
-              bio: true,
-              avatarImg: true
+              avatarImg: true,
+              bio: true
             }
           }
         }
