@@ -24,7 +24,7 @@ const LikeBtn = (props) => {
   }
 
   const getData = async () => {
-    const data = await axios.get('/api/my/follows-likes-bookmarks').then((res) => res.data)
+    const data = await axios.get('/api/my/interactions').then((res) => res.data)
 
     setLikes(data.filter((element) => element.actionType === 'LIKE' && element.postId === props.id))
 

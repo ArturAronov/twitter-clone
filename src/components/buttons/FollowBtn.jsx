@@ -29,7 +29,7 @@ const FollowBtn = (props) => {
   }
 
   const getData = async () => {
-    const data = await axios.get('/api/my/follows-likes-bookmarks').then((res) => res.data)
+    const data = await axios.get('/api/my/interactions').then((res) => res.data)
 
     if(data?.filter) {
       const filterActionTypeProps = data.filter((element) => {
