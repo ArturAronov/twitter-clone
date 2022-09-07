@@ -11,9 +11,6 @@ handler
     try {
       const getFollowing = await prisma.interaction.findMany({
         where: {
-          actionType: {
-            in: ['FOLLOW', 'BOOKMARK', 'LIKE']
-          },
           postUserId: req.session.user.id
         }
 
