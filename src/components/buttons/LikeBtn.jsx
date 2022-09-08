@@ -34,8 +34,6 @@ const LikeBtn = (props) => {
       }
     }
 
-    console.log(data)
-
     await axios.put('/api/my/interaction', data)
     await newInteraction()
   }
