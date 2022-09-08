@@ -9,7 +9,6 @@ const Stats = (props) => {
 
   return (
     <div className="mt-2 flex flex-row px-3">
-    {console.log(followers)}
       <div className="mr-5 hover:underline cursor-pointer">
         <span className="font-bold pr-1"> { following && following.length } </span>
         <span className="text-zinc-500">Following</span>
