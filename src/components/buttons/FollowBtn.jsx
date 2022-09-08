@@ -13,6 +13,7 @@ const FollowBtn = (props) => {
   const { newFollowers } = useFollowers(props.userName)
   const [btnClass, setBtnClass] = useState()
   const [btnText, setBtnText] = useState('')
+  const [interaction, setInteraction] = useState([])
 
   const toggleInteraction = async() => {
     const data = {
@@ -25,37 +26,35 @@ const FollowBtn = (props) => {
   }
 
   const getData = async () => {
-    const data = await axios.get('/api/my/interactions').then((res) => res.data)
-
-    if(data?.filter) {
-      const filterActionTypeProps = data.filter((element) => {
-        if(element.actionType === 'FOLLOW' && element.followingUserId === props.id) {
+    if(interactions) {
+      setInteraction(interactions.filter(element => {
+        if(element.actionType === 'FOLLOW' && element.postUserId === profile.id) {
           return element
         }
-      })
+      }))
     }
-    return data
   }
+
+  useEffect(() => {
+    getData()
+  },[])
+
+  useEffect(() => {
+    getData()
+  },[interactions])
 
   useEffect(() => {
     if (profile?.id && profile.id === props.id) {
       setBtnClass()
       setBtnText('')
-    } else if (interactions && interactions.length > 0) {
+    } else if (interaction.length > 0) {
       setBtnClass(BTN_CLASS.darkWarningHover)
       setBtnText('Unfollow')
     } else {
-      {console.log('here')}
       setBtnClass(BTN_CLASS.primary)
       setBtnText('Follow')
     }
-  }, [profile, interactions])
-
-  useEffect(() => {
-    if(interactions) {
-      getData()
-    }
-  }, [interactions])
+  }, [profile, interaction])
 
   return (
     <div
