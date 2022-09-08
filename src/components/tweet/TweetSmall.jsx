@@ -109,7 +109,7 @@ const TweetSmall = (props) => {
             <div className="w-8 h-8 hero-content"> <LikeBtn post={tweetData} /> </div>
             <div>  </div>
           </div>
-          <div className="mx-5"> <BookmarkBtn id={tweetData.id} /> </div>
+          <div className="mx-5"> <BookmarkBtn post={tweetData} /> </div>
           <TweetModal type={postType} post={tweetData} user={userData} />
         </div>
       </div>
