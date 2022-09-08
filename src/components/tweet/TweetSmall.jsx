@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import router from 'next/router'
 import moment from 'moment'
+import axios from 'axios'
 
 import TweetModal from '../modals/TweetModal'
 
@@ -15,6 +16,7 @@ const TweetSmall = (props) => {
   const [dateFormat, setDateFormat] = useState()
   const [postType, setPostType] = useState()
   const [postFeed, setPostFeed] = useState()
+  const [postUser, setPostUser] = useState([])
 
   const {
     tweetData,
@@ -24,8 +26,10 @@ const TweetSmall = (props) => {
   useEffect(() => {
     if(tweetData?.actionType) {
       setPostFeed(tweetData.post)
+      axios.get(`/api/usersId/${tweetData.post.userId}`).then(res => setPostUser(res.data))
     } else {
       setPostFeed(tweetData)
+      setPostUser(userData)
     }
   }, [])
 
@@ -46,13 +50,12 @@ const TweetSmall = (props) => {
 
   return (
     <div className="flex flex-row py-2 hover:bg-zinc-900 outline outline-1 outline-zinc-700 mr-[1px] mb-[1px] px-5">
-    {console.log(props)}
-      <img src={userData.avatarImg} className="w-10 h-10 object-cover rounded-full m-2 cursor-pointer" onClick={() => router.push(`/${userData.userName}`)} />
+      <img src={postUser.avatarImg} className="w-10 h-10 object-cover rounded-full m-2 cursor-pointer" onClick={() => router.push(`/${postUser.userName}`)} />
       <div className="w-full  cursor-pointer">
-        <div onClick={() => router.push(`/tweet/${tweetData.id}`)}>
+        <div onClick={() => router.push(`/tweet/${postFeed.id}`)}>
           <div className="w-full">
-            <span className="pr-1 font-bold">{userData.name}</span>
-            <span className="pr-1 text-zinc-500">@{userData.userName}</span>
+            <span className="pr-1 font-bold">{postUser.name}</span>
+            <span className="pr-1 text-zinc-500">@{postUser.userName}</span>
             <span className="pr-1 text-zinc-500">·</span>
             <span className="pr-1 text-zinc-500">{ dateFormat }</span>
           </div>
@@ -103,7 +106,7 @@ const TweetSmall = (props) => {
             <div>  </div>
           </label>
           <div className="flex flex-row hero-content py-1 hover:text-pink-600 group-hover:pink-600 text-sm text-zinc-500 cursor-pointer">
-            <div className="w-8 h-8 hero-content"> <LikeBtn id={tweetData.id} /> </div>
+            <div className="w-8 h-8 hero-content"> <LikeBtn post={tweetData} /> </div>
             <div>  </div>
           </div>
           <div className="mx-5"> <BookmarkBtn id={tweetData.id} /> </div>
