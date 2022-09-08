@@ -16,7 +16,6 @@ const LikeBtn = (props) => {
   const toggleInteraction = async () => {
     let data = {
       postUserId: profile.id,
-      postId: props.post.id,
       actionType: 'LIKE',
     }
 
@@ -25,13 +24,17 @@ const LikeBtn = (props) => {
       data = {
         ...data,
         interactionUserId: props.post.post.userId,
+        postId: props.post.postId,
       }
     } else {
       data = {
         ...data,
         interactionUserId: props.post.userId,
+        postId: props.post.id,
       }
     }
+
+    console.log(data)
 
     await axios.put('/api/my/interaction', data)
     await newInteraction()
