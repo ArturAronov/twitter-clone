@@ -102,6 +102,7 @@ export const getServerSideProps = async (context) => {
           select: {
             content: true,
             date: true,
+            userId: true
           }
         }
       },
