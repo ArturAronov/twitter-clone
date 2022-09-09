@@ -3,15 +3,15 @@ import router from 'next/router'
 import axios from 'axios'
 import FormData from 'form-data'
 
-import useProfile from '../../hooks/useProfile'
-
 import TinyRetweet from './TinyRetweet'
+import TweetLengthProgress from './TweetLengthProgress'
+
+import useProfile from '../../hooks/useProfile'
 
 import TweetBtnActive from '../buttons/TweetBtnActive'
 import TweetBtnInactive from '../buttons/TweetBtnInactive'
 import ImgUploadBtn from '../buttons/ImgUploadBtn'
-
-import TweetLengthProgress from './TweetLengthProgress'
+import CloseBtn from '../buttons/CloseBtn'
 
 const NewTweet = (props) => {
   const [text, setText] = useState('')
@@ -35,18 +35,35 @@ const NewTweet = (props) => {
   }
 
   const handleSubmit = async (postType) => {
-    const retweetNotification = `${props.user.userName} retweeted your post`
-    const replyNotification = `${props.user.userName} replied to your post your post`
-
-    const objData = {
-      postType: selectedFile ? 'MEDIA' : props.postType,
-      content: text || ' ',
-      postId: props.post.id ? props.post.id : null
+    let notificationData = {
+      userId: profile.id
     }
 
-    const notificationData = {
-      userId: profile.id,
-      content: props.postType === 'RETWEET' ? retweetNotification : replyNotification
+    let objData = {
+      postType: props.postType,
+      content: text || ' ',
+    }
+
+    if(postType === 'RETWEET') {
+      notificationData = {
+        ...notificationData,
+        content: `${props.user.userName} retweeted your post`
+      }
+
+      objData = {
+        ...objData,
+        postId: props.post.id
+      }
+    } else if(postType === 'REPLY') {
+      notificationData = {
+        ...notificationData,
+        content: `${props.user.userName} replied to your post your post`
+      }
+
+      objData = {
+        ...objData,
+        postId: props.post.id
+      }
     }
 
     selectedFile && data.append('mediaUrl', selectedFile)
@@ -56,7 +73,7 @@ const NewTweet = (props) => {
     }
 
     await axios.post('/api/my/posts', data)
-    props.postType && await axios.post('/api/my/notifications/post', notificationData)
+    notificationData?.content && await axios.post('/api/my/notifications/post', notificationData)
     await router.push(`/${profile.userName}`)
   }
 
@@ -75,14 +92,30 @@ const NewTweet = (props) => {
 
   useEffect(() => {
     if ((text.length || selectedFile) && profile?.id) {
-      setButton(<TweetBtnActive />)
-      setButtonActive(true)
+      if(props.postType === 'REPLY') {
+        setButton(<TweetBtnActive action={'Reply'}/>)
+        setButtonActive(true)
+      } else if(props.postType === 'RETWEET') {
+        setButton(<TweetBtnActive action={'Retweet'}/>)
+        setButtonActive(true)
+      } else {
+        setButton(<TweetBtnActive action={'Tweet'}/>)
+        setButtonActive(true)
+      }
     } else if (props.postType === 'RETWEET' && profile?.id) {
-      setButton(<TweetBtnActive />)
+      setButton(<TweetBtnActive action={'Retweet'}/>)
       setButtonActive(true)
     } else {
-      setButton(<TweetBtnInactive />)
-      setButtonActive(false)
+      if(props.postType === 'REPLY') {
+        setButton(<TweetBtnInactive action={'Reply'}/>)
+        setButtonActive(false)
+      } else if(props.postType === 'RETWEET') {
+        setButton(<TweetBtnInactive action={'Retweet'}/>)
+        setButtonActive(false)
+      } else {
+        setButton(<TweetBtnInactive action={'Tweet'}/>)
+        setButtonActive(false)
+      }
     }
 
     setPercent((text.length * 100) / 280)
@@ -105,7 +138,6 @@ const NewTweet = (props) => {
           { profile?.avatarImg && <img src={profile.avatarImg} /> }
         </div>
       </div>
-
       <div className="w-full flex flex-col grid-cols-1 divide-y divide-zinc-700">
         <div>
           <textarea
@@ -133,7 +165,7 @@ const NewTweet = (props) => {
                   className="btn btn-sm btn-circle absolute right-0 top-0 m-1 text-xl backdrop-blur-sm backdrop-contrast-50 text-zinc-0"
                   onClick={handleImageRemove}
                 >
-                  ✕
+                <CloseBtn />
                 </div>
                 <img src={preview} />
               </div>
@@ -153,16 +185,16 @@ const NewTweet = (props) => {
               <input className="hidden" type="file" />
             </label>
           </div>
-          <div className="flex flex-row p-2 hero-content">
+          <div className="flex flex-row p-2 hero-content" htmlFor="TweetModal">
             {text.length > 0 && <TweetLengthProgress percent={percent} />}
-            <label
+            <div
               htmlFor="TweetModal"
               onClick={() => {
                 buttonActive && handleSubmit(props.postType || 'TWEET')
               }}
             >
               { button }
-            </label>
+            </div>
           </div>
         </div>
       </div>
