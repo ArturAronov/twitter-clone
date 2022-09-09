@@ -49,6 +49,14 @@ const TinyRetweet = (props) => {
           <div className="pl-7">
             { showRetweet.content }
           </div>
+          {
+            showRetweet.postType &&
+            <div className='flex justify-center sm:py-5'>
+              <div className='max-w-[80%]'>
+                <img src={showRetweet.mediaUrl} className='rounded-xl'/>
+              </div>
+            </div>
+          }
         </div>
         )
       }

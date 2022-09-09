@@ -71,22 +71,20 @@ const TweetSmall = (props) => {
             <div>
               { postFeed?.content && postFeed.content }
             </div>
-            { props?.tweetData?.mediaUrl
-              && (
-              <div className="hero-content py-3">
-                <img src={props.tweetData.mediaUrl} />
+            { props?.tweetData?.mediaUrl &&
+              <div className='flex justify-center sm:py-5'>
+                <div className='max-w-[95%]'>
+                  <img src={props.tweetData.mediaUrl} className='rounded-xl'/>
+                </div>
               </div>
-              )}
-
+            }
           </div>
         </div>
         {
-          tweetData.postType === 'RETWEET'
-          && (
+          tweetData.postType === 'RETWEET' &&
           <div>
             <TinyRetweet postId={tweetData.postId} />
           </div>
-          )
         }
         <div className="flex flex-row justify-between py-1 w-full">
           <label
