@@ -1,7 +1,7 @@
 import BTN_CLASS from '../../globalVars/btn_class'
 
-const TweetBtnInactive = () => (
-  <button className={BTN_CLASS.secondaryDisabled}>Tweet</button>
+const TweetBtnInactive = (props) => (
+  <button className={BTN_CLASS.secondaryDisabled}> { props.action } </button>
 )
 
 export default TweetBtnInactive
