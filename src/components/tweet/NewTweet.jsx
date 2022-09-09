@@ -40,11 +40,30 @@ const NewTweet = (props) => {
     }
 
     let objData = {
-      postType: props.postType,
       content: text || ' ',
     }
 
-    if(postType === 'RETWEET') {
+    if(selectedFile) {
+      if(postType === 'RETWEET') {
+        notificationData = {
+          ...notificationData,
+          content: `${props.user.userName} retweeted your post`
+        }
+      }
+
+      if(postType === 'REPLY') {
+        notificationData = {
+          ...notificationData,
+          content: `${props.user.userName} replied to your post your post`
+        }
+      }
+
+      objData = {
+        ...objData,
+        postType: 'MEDIA',
+        postId: props.post.id
+      }
+    } else if(postType === 'RETWEET') {
       notificationData = {
         ...notificationData,
         content: `${props.user.userName} retweeted your post`
@@ -52,6 +71,7 @@ const NewTweet = (props) => {
 
       objData = {
         ...objData,
+        postType: props.postType,
         postId: props.post.id
       }
     } else if(postType === 'REPLY') {
@@ -62,6 +82,7 @@ const NewTweet = (props) => {
 
       objData = {
         ...objData,
+        postType: props.postType,
         postId: props.post.id
       }
     }
@@ -147,19 +168,9 @@ const NewTweet = (props) => {
             onChange={(e) => handleTweetInput(e)}
           />
         </div>
-        {
-              props.postType === 'RETWEET'
-              && (
-              <div className="py-3">
-                <TinyRetweet postId={props.post.id} />
-              </div>
-              )
-            }
-
         <div>
           {
-              preview
-              && (
+              preview &&
               <div className="relative flex justify-center">
                 <div
                   className="btn btn-sm btn-circle absolute right-0 top-0 m-1 text-xl backdrop-blur-sm backdrop-contrast-50 text-zinc-0"
@@ -169,8 +180,16 @@ const NewTweet = (props) => {
                 </div>
                 <img src={preview} />
               </div>
+            }
+        {
+              props.postType === 'RETWEET'
+              && (
+              <div className="py-3">
+                <TinyRetweet postId={props.post.id} />
+              </div>
               )
             }
+
         </div>
 
         <div className="flex flex-row justify-between">
