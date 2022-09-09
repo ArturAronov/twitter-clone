@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import router from 'next/router'
 import useSWR from 'swr'
 import axios from 'axios'
 import moment from 'moment'
@@ -10,9 +11,12 @@ const TinyRetweet = (props) => {
 
   const { data: showRetweet } = useSWR(
     // Pass null when there is no id
-    props.postId ? (`/api/my/posts/${props.postId}`) : null,
+    props.postId ? (`/api/post/${props.postId}`) : null,
     (key) => axios.get(key).then((res) => res.data)
   )
+
+  const borderReply = 'mr-2 pt-3'
+  const borderNormal = 'mr-2 sm:my-4 p-3 border border-zinc-700 rounded-lg hover:bg-zinc-900'
 
   useEffect(() => {
     const currentDateInt = parseInt(moment(new Date()).format('YYYYMMDD'))
@@ -32,7 +36,7 @@ const TinyRetweet = (props) => {
       {
         showRetweet?.id
         && (
-        <div>
+        <div className={props.reply ? borderReply : borderNormal} onClick={() => router.push(`/tweet/${showRetweet.id}`)}>
           <div className="flex flex-row hero">
             <div>
               <TinyProfile userId={showRetweet.userId} />
