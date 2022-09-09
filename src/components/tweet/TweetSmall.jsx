@@ -49,7 +49,7 @@ const TweetSmall = (props) => {
   }, [postFeed])
 
   return (
-    <div className="flex flex-row py-2 hover:bg-zinc-900 outline outline-1 outline-zinc-700 mr-[1px] mb-[1px] px-5">
+    <div className="flex flex-row py-2 hover:bg-zinc-800 outline outline-1 outline-zinc-700 mr-[1px] mb-[1px] sm:px-5">
       <img src={postUser.avatarImg} className="w-10 h-10 object-cover rounded-full m-2 cursor-pointer" onClick={() => router.push(`/${postUser.userName}`)} />
       <div className="w-full  cursor-pointer">
         <div onClick={() => router.push(`/tweet/${postFeed.id}`)}>
@@ -78,16 +78,16 @@ const TweetSmall = (props) => {
               </div>
               )}
 
-            {
-              tweetData.postType === 'RETWEET'
-              && (
-              <div className="border border-zinc-700 rounded-lg px-3 py-2 mt-2 hover:bg-zinc-800" onClick={() => router.push(`/tweet/${tweetData.postId}`)}>
-                <TinyRetweet postId={tweetData.postId} />
-              </div>
-              )
-            }
           </div>
         </div>
+        {
+          tweetData.postType === 'RETWEET'
+          && (
+          <div>
+            <TinyRetweet postId={tweetData.postId} />
+          </div>
+          )
+        }
         <div className="flex flex-row justify-between py-1 w-full">
           <label
             className="flex flex-row hero-content py-1 hover:text-emerald-600 text-sm text-zinc-500 cursor-pointer"
@@ -110,10 +110,9 @@ const TweetSmall = (props) => {
             <div>  </div>
           </div>
           <div className="mx-5"> <BookmarkBtn post={tweetData} /> </div>
-          <TweetModal type={postType} post={tweetData} user={userData} />
         </div>
+          <TweetModal type={postType} post={tweetData} user={userData} />
       </div>
-
     </div>
   )
 }
