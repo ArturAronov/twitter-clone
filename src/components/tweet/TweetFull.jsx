@@ -10,6 +10,8 @@ import ReplyBtn from '../buttons/ReplyBtn'
 import RetweetBtn from '../buttons/RetweetBtn'
 import BookmarkBtn from '../buttons/BookmarkBtn'
 
+import TinyRetweet from './TinyRetweet'
+
 const TweetFull = ({ tweet, replies }) => {
   const [dateFormat, setDateFormat] = useState()
   const [postType, setPostType] = useState()
@@ -50,14 +52,26 @@ const TweetFull = ({ tweet, replies }) => {
           </div>
           { tweet?.mediaUrl &&
             (
-              <div className="hero-content py-3">
-                <img src={tweet.mediaUrl} />
+              <div className='flex justify-center sm:py-5'>
+              <div className='max-w-[80%]'>
+                <img src={tweet.mediaUrl} className='rounded-xl'/>
               </div>
+            </div>
             )
           }
-          <div className="text-zinc-500 my-2 px-3">
-            { dateFormat }
-          </div>
+        </div>
+        <div className='cursor-pointer'>
+          {
+            tweet.postType === 'RETWEET' &&
+            <div className='flex justify-center'>
+              <div className='w-10/12'>
+                <TinyRetweet postId={tweet.postId}/>
+              </div>
+            </div>
+          }
+        </div>
+        <div className="text-zinc-500 my-2 px-3">
+          { dateFormat }
         </div>
         <div className="flex flex-row outline outline-1 outline-zinc-700 p-2">
           <div className="pr-3 text-sm">
@@ -74,7 +88,6 @@ const TweetFull = ({ tweet, replies }) => {
           </div>
         </div>
         <div className="w-full justify-around flex flex-row p-3">
-          <div className="mx-5"> <LikeBtn id={tweet.id} /> </div>
           <label
             className="mx-5 cursor-pointer"
             htmlFor="TweetModal"
@@ -85,10 +98,11 @@ const TweetFull = ({ tweet, replies }) => {
             htmlFor="TweetModal"
             onClick={() => setPostType('RETWEET')}
           > <RetweetBtn /> </label>
+          <div className="mx-5"> <LikeBtn post={tweet} /> </div>
           <div className="mx-5"> <BookmarkBtn post={tweet} /> </div>
-          <TweetModal type={postType} post={tweet} />
+          <TweetModal type={postType} post={tweet} user={tweet.user}/>
         </div>
-        <div className="">
+        <div>
           {/* {
             replies
             && replies.map((element) => <TweetSmall tweetData={element} userData={element.user} replyingTo={tweet.user} />)
