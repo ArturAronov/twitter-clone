@@ -5,7 +5,7 @@ import CloseBtn from '../buttons/CloseBtn'
 const TweetModal = (props) => (
   <>
     <input className="modal-toggle" type="checkbox" id="TweetModal" />
-    <div className="modal" htmlFor="TweetModal">
+    <div className="modal overflow-y-auto" htmlFor="TweetModal">
       <label className="flex flex-col bg-zinc-1000 border border-zinc-700 shadow-sm shadow-zinc-500 rounded-md w-1/2">
         <div className="modal-action">
           <label className="btn hover:bg-zinc-800 btn btn-sm btn-circle mx-4 my-2 text-2xl text-zinc-0" htmlFor="TweetModal">
