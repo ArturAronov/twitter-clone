@@ -1,10 +1,10 @@
 import router from 'next/router'
 import axios from 'axios'
-import userNotifications from '../../hooks/userNotifications'
+import useNotifications from '../../hooks/useNotifications'
 import BTN_CLASS from '../../globalVars/btn_class'
 
 const NotificationModal = (props) => {
-  const { notifications, newNotifications } = userNotifications()
+  const { notifications, newNotifications } = useNotifications()
   const data = { id: parseInt(props.id) }
 
   return (
