@@ -3,7 +3,7 @@ import prisma from '../../controllers/_helpers/prisma'
 
 const Tweet = (props) => (
   <div>
-    <TweetFull tweet={props.post} replies={props.replies} />
+    <TweetFull tweetData={props.post} replies={props.replies} />
   </div>
 )
 

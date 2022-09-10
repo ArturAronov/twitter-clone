@@ -184,28 +184,27 @@ const NewTweet = (props) => {
         </div>
         <div>
           {
-              preview &&
-              <div className="relative flex justify-center">
-                <div
-                  className="btn btn-sm btn-circle absolute right-0 top-0 m-1 text-xl backdrop-blur-sm backdrop-contrast-50 text-zinc-0"
-                  onClick={handleImageRemove}
-                >
-                <CloseBtn />
-                </div>
-                <img src={preview} />
+            preview &&
+            <div className="relative flex justify-center">
+              <div
+                className="btn btn-sm btn-circle absolute right-0 top-0 m-1 text-xl backdrop-blur-sm backdrop-contrast-50 text-zinc-0"
+                onClick={handleImageRemove}
+              >
+              <CloseBtn />
               </div>
-            }
-        {
-              props.postType === 'RETWEET'
-              && (
-              <div className="py-3">
-                <TinyRetweet postId={props.post.id} />
-              </div>
-              )
-            }
+              <img src={preview} />
+            </div>
+          }
+          {
+            props.postType === 'RETWEET' &&
+            <div className="py-3">
+              <TinyRetweet postId={props.post.id} />
+            </div>
+
+          }
+
 
         </div>
-
         <div className="flex flex-row justify-between">
           <div className="p-5">
             <label onChange={(e) => {
@@ -223,7 +222,7 @@ const NewTweet = (props) => {
             <div
               htmlFor="TweetModal"
               onClick={() => {
-                buttonActive && handleSubmit(props.postType || 'TWEET')
+                buttonActive && handleSubmit(props.postType)
               }}
             >
               { button }

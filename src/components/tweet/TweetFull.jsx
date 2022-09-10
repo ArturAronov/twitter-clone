@@ -2,30 +2,28 @@ import { useState, useEffect } from 'react'
 import router from 'next/router'
 import moment from 'moment'
 
-import TweetModal from '../modals/TweetModal'
-
-import FollowBtn from '../buttons/FollowBtn'
-import LikeBtn from '../buttons/LikeBtn'
-import ReplyBtn from '../buttons/ReplyBtn'
-import RetweetBtn from '../buttons/RetweetBtn'
-import BookmarkBtn from '../buttons/BookmarkBtn'
-
+import InteractionsBar from './InteractionsBar'
 import TinyRetweet from './TinyRetweet'
+import Replies from './Replies'
+import FollowBtn from '../buttons/FollowBtn'
 
-const TweetFull = ({ tweet, replies }) => {
+const TweetFull = (props) => {
   const [dateFormat, setDateFormat] = useState()
-  const [postType, setPostType] = useState()
+
+  const {
+    tweetData,
+  } = props
 
   useEffect(() => {
     const currentDateInt = parseInt(moment(new Date()).format('YYYYMMDD'))
-    const tweetDateInt = parseInt(moment(tweet.date).format('YYYYMMDD'))
+    const tweetDateInt = parseInt(moment(tweetData.date).format('YYYYMMDD'))
 
     if (currentDateInt - tweetDateInt <= 30) {
-      setDateFormat(moment(tweet.date).fromNow())
+      setDateFormat(moment(tweetData.date).fromNow())
     } else if (currentDateInt - tweetDateInt <= 365) {
-      setDateFormat(moment(tweet.date).format('MMM D'))
+      setDateFormat(moment(tweetData.date).format('MMM D'))
     } else {
-      setDateFormat(moment(tweet.date).format('MMM D'))
+      setDateFormat(moment(tweetData.date).format('MMM D'))
     }
   }, [])
 
@@ -33,28 +31,28 @@ const TweetFull = ({ tweet, replies }) => {
     <div className="flex flex-col mx-4 sm:mx-0 mb-5 sm:mb-10">
       <div className="grid-cols-1 grid-rows-1 divide-zinc-700">
         <div className="w-full flex flex-row">
-          <img src={tweet.user.avatarImg} className="w-16 h-16 object-cover rounded-full m-2 cursor-pointer" onClick={() => router.push(`/${tweet.user.userName}`)} />
+          <img src={tweetData.user.avatarImg} className="w-16 h-16 object-cover rounded-full m-2 cursor-pointer" onClick={() => router.push(`/${tweetData.user.userName}`)} />
           <div className="w-full cursor-pointer">
             <div className="text-lg font-semibold ">
-              { tweet.user.name }
+              { tweetData.user.name }
             </div>
             <div className="text-zinc-500 ">
-              @{tweet.user.userName}
+              @{tweetData.user.userName}
             </div>
           </div>
           <div className="px-5">
-            <FollowBtn id={tweet.user.id} userName={tweet.user.userName} />
+            <FollowBtn id={tweetData.user.id} userName={tweetData.user.userName} />
           </div>
         </div>
-        <div className="cursor-pointer" onClick={() => router.push(`/tweet/${tweet.id}`)}>
+        <div className="cursor-pointer" onClick={() => router.push(`/tweet/${tweetData.id}`)}>
           <div className="text-3xl mt-5 px-3">
-            { tweet.content }
+            { tweetData.content }
           </div>
-          { tweet?.mediaUrl &&
+          { tweetData?.mediaUrl &&
             (
               <div className='flex justify-center sm:py-5'>
               <div className='max-w-[80%]'>
-                <img src={tweet.mediaUrl} className='rounded-xl'/>
+                <img src={tweetData.mediaUrl} className='rounded-xl'/>
               </div>
             </div>
             )
@@ -62,10 +60,10 @@ const TweetFull = ({ tweet, replies }) => {
         </div>
         <div className='cursor-pointer'>
           {
-            tweet.postType === 'RETWEET' &&
+            tweetData.postType === 'RETWEET' &&
             <div className='flex justify-center'>
               <div className='w-10/12'>
-                <TinyRetweet postId={tweet.postId}/>
+                <TinyRetweet postId={tweetData.postId}/>
               </div>
             </div>
           }
@@ -73,40 +71,13 @@ const TweetFull = ({ tweet, replies }) => {
         <div className="text-zinc-500 my-2 px-3">
           { dateFormat }
         </div>
-        <div className="flex flex-row outline outline-1 outline-zinc-700 p-2">
-          <div className="pr-3 text-sm">
-            <span className="font-semibold">15 </span>
-            <span className="text-zinc-500">Comments</span>
-          </div>
-          <div className="pr-3 text-sm">
-            <span className="font-semibold">15 </span>
-            <span className="text-zinc-500">Replies</span>
-          </div>
-          <div className="pr-3 text-sm">
-            <span className="font-semibold">15 </span>
-            <span className="text-zinc-500">Retweets</span>
-          </div>
-        </div>
-        <div className="w-full justify-around flex flex-row p-3">
-          <label
-            className="mx-5 cursor-pointer"
-            htmlFor="TweetModal"
-            onClick={() => setPostType('REPLY')}
-          > <ReplyBtn /> </label>
-          <label
-            className="mx-5 cursor-pointer"
-            htmlFor="TweetModal"
-            onClick={() => setPostType('RETWEET')}
-          > <RetweetBtn /> </label>
-          <div className="mx-5"> <LikeBtn post={tweet} /> </div>
-          <div className="mx-5"> <BookmarkBtn post={tweet} /> </div>
-          <TweetModal type={postType} post={tweet} user={tweet.user}/>
+        <hr/>
+        <div className='px-10'>
+          <InteractionsBar post={tweetData} user={tweetData.user}/>
         </div>
         <div>
-          {/* {
-            replies
-            && replies.map((element) => <TweetSmall tweetData={element} userData={element.user} replyingTo={tweet.user} />)
-          } */}
+          <hr/>
+          <Replies postId={props.tweetData.id} userName={tweetData.user.userName}/>
         </div>
       </div>
     </div>
