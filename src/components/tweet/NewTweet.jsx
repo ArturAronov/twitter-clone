@@ -61,7 +61,6 @@ const NewTweet = (props) => {
       objData = {
         ...objData,
         postType: 'MEDIA',
-        postId: props.post.id
       }
     } else if(postType === 'RETWEET') {
       notificationData = {
