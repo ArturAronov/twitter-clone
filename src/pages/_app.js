@@ -1,6 +1,6 @@
 import '../styles/globals.css'
-import UserNav from '../components/navbar/UserNav'
-import Sidebar from '../components/sidebar/Sidebar'
+import UserNav from '../components/UserNav'
+import Sidebar from '../components/Sidebar'
 import Header from '../components/Header'
 
 export default function MyApp({ Component, pageProps }) {
