@@ -79,3 +79,7 @@ input {
   -moz-box-shadow: none;
   box-shadow: none;
 }
+
+hr {
+  color: #3f3f46
+}
