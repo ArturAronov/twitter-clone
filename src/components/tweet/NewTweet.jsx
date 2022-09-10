@@ -49,12 +49,27 @@ const NewTweet = (props) => {
           ...notificationData,
           content: `${props.user.userName} retweeted your post`
         }
-      }
 
-      if(postType === 'REPLY') {
+        objData = {
+          ...objData,
+          postType: 'MEDIA',
+          postId: props.post.id
+        }
+      } else if(postType === 'REPLY') {
         notificationData = {
           ...notificationData,
           content: `${props.user.userName} replied to your post your post`
+        }
+
+        objData = {
+          ...objData,
+          postType: 'MEDIA',
+          postId: props.post.id
+        }
+      } else {
+        objData = {
+          ...objData,
+          postType: 'MEDIA',
         }
       }
 
