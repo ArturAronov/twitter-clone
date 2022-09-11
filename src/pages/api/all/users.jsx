@@ -9,6 +9,7 @@ handler
   .get(async (req, res) => {
     try {
       const user = await prisma.user.findMany({
+        take: 8,
         select: {
           id: true,
           userName: true,

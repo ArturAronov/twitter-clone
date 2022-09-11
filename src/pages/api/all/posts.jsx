@@ -9,6 +9,10 @@ handler
   .get(async (req, res) => {
     try {
       const post = await prisma.post.findMany({
+        take: 13,
+        where: {
+          postType: 'TWEET'
+        },
         include: {
           user: {
             select: {
