@@ -57,19 +57,18 @@ handler
       })
 
       if (await verifiedInput.mediaUrl) {
-        const uuid = await uuidv4() + req.session.user.id
+        const uuid = await 'twitter-clone-'+uuidv4() + req.session.user.id
         await uploadFileAsync(uuid, verifiedInput, req)
       }
 
-      // If there's a mediaUrl input, assign postType as a MEDIA, otherwise postType is TWEET
       let postType
 
-      if (req?.body?.postType === 'REPLY' && verifiedInput?.postId) {
+      if (verifiedInput?.mediaUrl) {
+        postType = 'MEDIA'
+      } else if (req?.body?.postType === 'REPLY' && verifiedInput?.postId) {
         postType = 'REPLY'
       } else if (verifiedInput?.postId) {
         postType = 'RETWEET'
-      } else if (verifiedInput?.mediaUrl) {
-        postType = 'MEDIA'
       } else {
         postType = 'TWEET'
       }
