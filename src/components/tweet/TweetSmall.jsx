@@ -45,7 +45,7 @@ const TweetSmall = (props) => {
     <>
       <div className="flex flex-row py-2 hover:bg-zinc-800 mr-[1px] mb-[1px] sm:px-5">
 
-        <img src={postUser.avatarImg} className="w-10 h-10 object-cover rounded-full m-4 cursor-pointer" onClick={() => router.push(`/${postUser.userName}`)} />
+        <img src={postUser.avatarImg} className="w-10 h-10 object-cover rounded-full mx-4 my-1 cursor-pointer" onClick={() => router.push(`/${postUser.userName}`)} />
         <div className="w-full  cursor-pointer">
           <div onClick={() => router.push(`/tweet/${postFeed.id}`)}>
             <div className="w-full">
