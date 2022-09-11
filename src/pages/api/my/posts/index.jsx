@@ -63,12 +63,12 @@ handler
 
       let postType
 
-      if (verifiedInput?.mediaUrl) {
-        postType = 'MEDIA'
-      } else if (req?.body?.postType === 'REPLY' && verifiedInput?.postId) {
+      if (req?.body?.postType === 'REPLY' && verifiedInput?.postId) {
         postType = 'REPLY'
       } else if (verifiedInput?.postId) {
         postType = 'RETWEET'
+      } else if (verifiedInput?.mediaUrl) {
+        postType = 'MEDIA'
       } else {
         postType = 'TWEET'
       }
