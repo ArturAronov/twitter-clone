@@ -4,15 +4,23 @@ import moment from 'moment'
 
 import InteractionsBar from './InteractionsBar'
 import TinyRetweet from './TinyRetweet'
-import Replies from './Replies'
 import FollowBtn from '../buttons/FollowBtn'
+import TweetModal from '../modals/TweetModal'
 
 const TweetFull = (props) => {
   const [dateFormat, setDateFormat] = useState()
+  const [postType, setPostType] = useState()
+
+  const handlePostTypeChange = (type) => {
+    setPostType(type)
+  }
 
   const {
     tweetData,
   } = props
+
+  useEffect(() => {
+  }, [props])
 
   useEffect(() => {
     const currentDateInt = parseInt(moment(new Date()).format('YYYYMMDD'))
@@ -72,13 +80,11 @@ const TweetFull = (props) => {
           { dateFormat }
         </div>
         <hr/>
-        <div className='px-10'>
-          <InteractionsBar post={tweetData} user={tweetData.user}/>
+        <div className='px-5'>
+          <InteractionsBar post={tweetData} user={tweetData.user} onPostTypeChange={handlePostTypeChange}/>
+          <TweetModal type={postType} post={props.tweetData} user={props.tweetData.user}/>
         </div>
-        <div>
-          <hr/>
-          <Replies postId={props.tweetData.id} userName={tweetData.user.userName}/>
-        </div>
+        <hr/>
       </div>
     </div>
   )
