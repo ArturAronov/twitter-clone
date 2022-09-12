@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import TweetModal from '../modals/TweetModal'
 
 import useStats from '../../hooks/useStats';
 import LikeBtn from '../buttons/LikeBtn'
@@ -8,8 +7,8 @@ import RetweetBtn from '../buttons/RetweetBtn'
 import BookmarkBtn from '../buttons/BookmarkBtn'
 
 const InteractionsBar = (props) => {
-  const [postType, setPostType] = useState()
   const [postId, setPostId] = useState()
+  const [postType, setPostType] = useState()
   const { stats } = useStats(postId)
 
   useEffect(() => {
@@ -18,51 +17,50 @@ const InteractionsBar = (props) => {
   }, [props])
 
   return(
-    <>
-      <div className="w-full justify-between flex flex-row ">
+    <div className='mx-5'>
+      <div className="w-full justify-between flex flex-row z-0">
         <label
-          className="mx-5 cursor-pointer flex flex-row hero-content"
+          className="mx-5 cursor-pointer flex flex-row"
           htmlFor="TweetModal"
-          onClick={() => setPostType('REPLY')}
+          onClick={() => props.onPostTypeChange('REPLY')}
         >
           <span>
             <ReplyBtn />
           </span>
-          <span className='text-sm text-zinc-500 pl-1'>
+          <span className='text-sm text-zinc-500 pl-1 hero-content'>
             {stats?.replies && stats.replies}
           </span>
         </label>
         <label
-          className="mx-5 cursor-pointer flex flex-row hero-content"
+          className="mx-5 cursor-pointer flex flex-row"
           htmlFor="TweetModal"
-          onClick={() => setPostType('RETWEET')}
+          onClick={() => props.onPostTypeChange('RETWEET')}
         >
-          <span>
+          <div>
             <RetweetBtn />
-          </span>
-          <span className='text-sm text-zinc-500 pl-1'>
+          </div>
+          <span className='text-sm text-zinc-500 pl-1 hero-content'>
             {stats?.retweets && stats.retweets}
           </span>
         </label>
-        <div className="mx-5 flex flex-row hero-content">
+        <div className="mx-5 flex flex-row">
           <span>
             <LikeBtn post={props.post} />
           </span>
-          <span className='text-sm text-zinc-500 pl-1'>
+          <span className='text-sm text-zinc-500 pl-1 hero-content'>
             {stats?.likes && stats.likes}
           </span>
         </div>
-        <div className="mx-5 flex flex-row hero-content">
+        <div className="mx-5 flex flex-row">
           <span className='text-sm text-zinc-500 pl-1'>
             <BookmarkBtn post={props.post} />
           </span>
-          <span className='text-sm text-zinc-500 pl-1'>
+          <span className='text-sm text-zinc-500 pl-1 hero-content'>
             {stats?.bookmarks && stats.bookmarks}
           </span>
         </div>
-        <TweetModal type={postType} post={props.post} user={props.user}/>
       </div>
-    </>
+    </div>
   )
 }
 
