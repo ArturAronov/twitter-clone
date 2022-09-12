@@ -3,7 +3,6 @@ import router from 'next/router'
 import moment from 'moment'
 import axios from 'axios'
 
-import InteractionsBar from './InteractionsBar'
 import TinyRetweet from './TinyRetweet'
 
 const TweetSmall = (props) => {
@@ -43,8 +42,7 @@ const TweetSmall = (props) => {
 
   return (
     <>
-      <div className="flex flex-row py-2 hover:bg-zinc-800 mr-[1px] mb-[1px] sm:px-5">
-
+      <div className="flex flex-row py-2 mr-[1px] mb-[1px] sm:px-5">
         <img src={postUser.avatarImg} className="w-10 h-10 object-cover rounded-full mx-4 my-1 cursor-pointer" onClick={() => router.push(`/${postUser.userName}`)} />
         <div className="w-full  cursor-pointer">
           <div onClick={() => router.push(`/tweet/${postFeed.id}`)}>
@@ -90,9 +88,7 @@ const TweetSmall = (props) => {
         </div>
       </div>
       <div className='mx-5'>
-        <InteractionsBar post={tweetData} user={userData}/>
       </div>
-      <hr/>
     </>
   )
 }
