@@ -11,7 +11,7 @@ handler
     try {
       const getNotifications = await prisma.notification.findMany({
         where: {
-          userId: req.session.user.id
+          receivingUser: req.session.user.id
         }
       })
 
