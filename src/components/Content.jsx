@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import TweetSmall from './tweet/TweetSmall'
 import NewTweet from './tweet/NewTweet'
+import TweetSmallMap from './tweet/TweetSmallMap'
 
 const Content = () => {
   const [tweets, setTweets] = useState([])
@@ -15,13 +15,7 @@ const Content = () => {
     <>
       <NewTweet />
       <hr/>
-      {
-        tweets.map(element => {
-          return(
-            <TweetSmall tweetData={element} userData={element.user} />
-          )
-        })
-      }
+      <TweetSmallMap keyName={'content'} tweets={tweets}/>
     </>
   )
 }
