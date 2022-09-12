@@ -6,6 +6,7 @@ import FormData from 'form-data'
 import TinyRetweet from './TinyRetweet'
 import TweetLengthProgress from './TweetLengthProgress'
 
+import useStats from '../../hooks/useStats'
 import useProfile from '../../hooks/useProfile'
 
 import TweetBtnActive from '../buttons/TweetBtnActive'
@@ -14,12 +15,14 @@ import ImgUploadBtn from '../buttons/ImgUploadBtn'
 import CloseBtn from '../buttons/CloseBtn'
 
 const NewTweet = (props) => {
+  const [postId, setPostId] = useState()
   const [text, setText] = useState('')
   const [percent, setPercent] = useState(0)
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState()
   const [button, setButton] = useState(<TweetBtnInactive />)
   const [buttonActive, setButtonActive] = useState(false)
+  const { newStats } = useStats(postId)
   const { profile } = useProfile()
 
   const data = new FormData()
@@ -107,9 +110,16 @@ const NewTweet = (props) => {
       data.append(i, objData[i])
     }
 
-    await axios.post('/api/my/posts', data)
+    let newPostId;
+
+    await axios.post('/api/my/posts', data).then(res => newPostId = res.data.id)
     notificationData?.content && await axios.post('/api/my/notifications/post', notificationData)
-    await router.push(`/${profile.userName}`)
+    if(postType === 'REPLY'){
+      await router.push(`/tweet/${props.post.id}`)
+    } else {
+      await router.push(`/tweet/${newPostId}`)
+    }
+    await newStats()
   }
 
   const onSelectFile = (e) => {
@@ -126,6 +136,8 @@ const NewTweet = (props) => {
   }
 
   useEffect(() => {
+    props?.post && setPostId(props.post.id)
+
     if ((text.length || selectedFile) && profile?.id) {
       if(props.postType === 'REPLY') {
         setButton(<TweetBtnActive action={'Reply'}/>)
