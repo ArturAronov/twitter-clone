@@ -1,14 +1,10 @@
-import TweetSmall from '../tweet/TweetSmall'
+import TweetSmallMap from '../tweet/TweetSmallMap'
 
 const TweetsWithReplies = (props) => (
   <>
     {
-      props?.APIdata
-      && props.APIdata.map((element) => (
-        <div key={element.id}>
-          <TweetSmall tweetData={element} userData={props.user} />
-        </div>
-      ))
+      props?.APIdata &&
+      <TweetSmallMap keyName={'tweets'} tweets={props.APIdata} userData={props.user}/>
     }
   </>
 )
