@@ -19,7 +19,7 @@ const Sidebar = () => {
           </div>
           {users.map(element => {
             return(
-              <div className='flex flex-row justify-between w-full p-2 hover:bg-zinc-700 hover:rounded-lg min-w-[300px]'>
+              <div className='flex flex-row justify-between w-full p-2 hover:bg-zinc-700 hover:rounded-lg min-w-[300px]' key={'sidebar'+element.id}>
                 <div className='flex flex-row' onClick={() => router.push(`/${element.userName}`)}>
                   <img src={element.avatarImg} className='h-[48px] w-[48px] object-cover rounded-full cursor-pointer' />
                   <div className='flex flex-col mx-2 truncate max-w-[130px]'>
