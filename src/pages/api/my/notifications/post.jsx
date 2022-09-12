@@ -7,7 +7,8 @@ import auth from '../../../../controllers/_middlewares/auth'
 const handler = nextConnect()
 const userInput = yup.object({
   userId: yup.string().required(),
-  content: yup.string().required()
+  content: yup.string().required(),
+  receivingUser: yup.string().required()
 })
 
 handler
@@ -35,7 +36,8 @@ handler
       const notification = await prisma.notification.create({
         data: {
           userId: verifiedInput.userId,
-          content: verifiedInput.content
+          content: verifiedInput.content,
+          receivingUser: verifiedInput.receivingUser
         }
       })
 
