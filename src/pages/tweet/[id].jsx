@@ -1,9 +1,12 @@
-import TweetFull from '../../components/tweet/TweetFull'
 import prisma from '../../controllers/_helpers/prisma'
+
+import TweetFull from '../../components/tweet/TweetFull'
+import TweetSmallMap from '../../components/tweet/TweetSmallMap'
 
 const Tweet = (props) => (
   <div>
     <TweetFull tweetData={props.post} replies={props.replies} />
+    <TweetSmallMap keyName={'replies'} tweets={props.replies}/>
   </div>
 )
 
