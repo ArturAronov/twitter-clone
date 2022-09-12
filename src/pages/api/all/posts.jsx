@@ -11,7 +11,9 @@ handler
       const post = await prisma.post.findMany({
         take: 13,
         where: {
-          postType: 'TWEET'
+          postType: {
+            in: ['TWEET', 'RETWEET']
+          }
         },
         include: {
           user: {
