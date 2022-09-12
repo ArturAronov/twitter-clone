@@ -83,8 +83,10 @@ const NewTweet = (props) => {
     } else if(postType === 'RETWEET') {
       notificationData = {
         ...notificationData,
-        content: `${props.user.userName} retweeted your post`
+        receivingUser: props.post.userId,
+        content: `${profile.userName} retweeted your post`
       }
+
 
       objData = {
         ...objData,
@@ -94,7 +96,8 @@ const NewTweet = (props) => {
     } else if(postType === 'REPLY') {
       notificationData = {
         ...notificationData,
-        content: `${props.user.userName} replied to your post your post`
+        receivingUser: props.post.userId,
+        content: `${profile.userName} replied to your post your post`
       }
 
       objData = {
