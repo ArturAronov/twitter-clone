@@ -3,10 +3,13 @@ import axios from 'axios'
 
 import LikeBtnSVG from './LikeBtnSVG'
 
-import useInteractions from '../../hooks/useInteractions'
+import useStats from '../../hooks/useStats'
 import useProfile from '../../hooks/useProfile'
+import useInteractions from '../../hooks/useInteractions'
 
 const LikeBtn = (props) => {
+  const [postId, setPostId] = useState()
+  const { stats, newStats } = useStats(postId)
   const { interactions, newInteraction } = useInteractions()
   const { profile } = useProfile()
   const [interaction, setInteraction] = useState([])
@@ -36,6 +39,7 @@ const LikeBtn = (props) => {
 
     await axios.put('/api/my/interaction', data)
     await newInteraction()
+    await newStats()
   }
 
   const getData = async () => {
@@ -60,6 +64,7 @@ const LikeBtn = (props) => {
 
 
   useEffect(() => {
+    setPostId(props.post.id)
     if (interaction.length > 0) {
       setButtonActive(true)
     } else {

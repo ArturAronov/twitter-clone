@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
+import useStats from '../../hooks/useStats'
 import useProfile from '../../hooks/useProfile'
 import useInteractions from '../../hooks/useInteractions'
 
@@ -8,6 +9,9 @@ import RemoveBookmark from './RemoveBookmark'
 import AddBookmark from './AddBookmark'
 
 const BookmarkBtn = (props) => {
+  const [postId, setPostId] = useState()
+  const { newStats } = useStats(postId)
+
   const { interactions, newInteraction } = useInteractions()
   const { profile } = useProfile()
 
@@ -37,6 +41,7 @@ const BookmarkBtn = (props) => {
 
     await axios.put('/api/my/interaction', data)
     await newInteraction()
+    await newStats()
   }
 
   const getData = async () => {
@@ -60,6 +65,7 @@ const BookmarkBtn = (props) => {
   },[interactions])
 
   useEffect(() => {
+    setPostId(props.post.id)
     interaction.length === 1 ? setButtonActive(<RemoveBookmark />) : setButtonActive(<AddBookmark />)
   }, [profile, interaction])
 
