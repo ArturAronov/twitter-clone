@@ -28,7 +28,7 @@ const FollowBtn = (props) => {
   const getData = async () => {
     if(interactions) {
       setInteraction(interactions.filter(element => {
-        if(element.actionType === 'FOLLOW' && element.postUserId === profile.id) {
+        if(element.actionType === 'FOLLOW' && profile?.id && element.postUserId === profile.id) {
           return element
         }
       }))
