@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 import NewTweet from './tweet/NewTweet'
 import TweetSmallMap from './tweet/TweetSmallMap'
 
+import useAllPosts from '../hooks/useAllPosts'
+
 const Content = () => {
+  const { allPosts } = useAllPosts()
   const [tweets, setTweets] = useState([])
 
   useEffect(() => {
-    axios.get('/api/all/posts').then(res => setTweets(res.data))
-  }, [])
+    if(allPosts) {
+      setTweets(allPosts)
+    }
+  }, [allPosts])
 
   return(
     <>
