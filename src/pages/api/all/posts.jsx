@@ -25,7 +25,10 @@ handler
               bio: true
             }
           }
-        }
+        },
+        orderBy: {
+        date: 'desc'
+      }
       })
 
       return res.status(201).json(post)
