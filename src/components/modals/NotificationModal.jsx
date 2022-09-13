@@ -4,7 +4,7 @@ import useNotifications from '../../hooks/useNotifications'
 import BTN_CLASS from '../../globalVars/btn_class'
 
 const NotificationModal = (props) => {
-  const { notifications, newNotifications } = useNotifications()
+  const { newNotifications } = useNotifications()
   const data = { id: parseInt(props.id) }
 
   return (
@@ -20,7 +20,23 @@ const NotificationModal = (props) => {
               {props.content.split(' ').slice(1, props.content.length - 1).join(' ')}
             </div>
           </div>
-          <div className="modal-action hero-content p-5">
+          {
+            props?.postId &&
+            <div className="modal-action hero-content p-1 mt-3">
+              <label
+                className={BTN_CLASS.primary}
+                htmlFor="NotificationModal"
+                onClick={async () => {
+                  await axios.put('/api/my/notifications/read', data)
+                  await newNotifications()
+                  await router.push(`/tweet/${props.postId}`)
+                }}
+              >
+                View Post
+              </label>
+            </div>
+          }
+          <div className="modal-action hero-content">
             <label
               className={BTN_CLASS.primary}
               htmlFor="NotificationModal"
