@@ -44,6 +44,7 @@ const FollowBtn = (props) => {
   },[interactions])
 
   useEffect(() => {
+    console.log(profile, props.id)
     if (profile?.id && profile.id === props.id) {
       setBtnClass()
       setBtnText('')
@@ -57,15 +58,20 @@ const FollowBtn = (props) => {
   }, [profile, interaction])
 
   return (
-    <div
-      className={btnClass}
-      onClick={async () => {
-        await toggleInteraction()
-        await newFollowers()
-      }}
-    >
-      {btnText}
-    </div>
+    <>
+      {
+        profile?.id &&
+        <div
+          className={btnClass}
+          onClick={async () => {
+            await toggleInteraction()
+            await newFollowers()
+          }}
+        >
+          {btnText}
+        </div>
+      }
+    </>
   )
 }
 
