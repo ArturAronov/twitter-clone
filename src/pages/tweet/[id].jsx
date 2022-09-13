@@ -4,10 +4,20 @@ import TweetFull from '../../components/tweet/TweetFull'
 import TweetSmallMap from '../../components/tweet/TweetSmallMap'
 
 const Tweet = (props) => (
-  <div>
-    <TweetFull tweetData={props.post} replies={props.replies} />
-    <TweetSmallMap keyName={'replies'} tweets={props.replies}/>
-  </div>
+  <>
+    {
+      props?.post?.id ?
+      <div>
+        {console.log(props)}
+        <TweetFull tweetData={props.post} replies={props.replies} />
+        <TweetSmallMap keyName={'replies'} tweets={props.replies}/>
+      </div>
+      :
+      <div className='text-center text-zinc-500 mt-10'>
+        Hmm...this tweet doesn’t exist. Try searching for something else.
+      </div>
+    }
+  </>
 )
 
 export async function getServerSideProps(context) {
