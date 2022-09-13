@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import _ from 'lodash'
 
 import prisma from '../controllers/_helpers/prisma'
@@ -23,16 +23,31 @@ const PagesUserInfo = ({ user }) => {
       setFeed(<Media user={user.slug.userClean} APIdata={user.slug.APIdata} />)
     } else if (slug[1] === 'likes') {
       setFeed(<Likes user={user.slug.userClean} APIdata={user.slug.APIdata} />)
+    } else {
+      setFeed(
+        <div className='text-center text-zinc-500 mt-10'>
+          Hmm...this page doesn’t exist. Try searching for something else.
+        </div>
+      )
     }
   }, [slug])
 
   return (
-    <div className="flex flex-col">
-      <Profile
-        input={user.slug}
-      />
-      { feed }
-    </div>
+    <>
+      {
+        !user?.slug?.userClean?.id ?
+        <div className='text-center text-zinc-500 mt-10'>
+          Hmm...this page doesn’t exist. Try searching for something else.
+        </div>
+        :
+        <div className="flex flex-col">
+          <Profile
+            input={user.slug}
+          />
+          { feed }
+        </div>
+      }
+    </>
   )
 }
 
@@ -60,7 +75,7 @@ export const getServerSideProps = async (context) => {
     }
   })
 
-  if (page === 'tweets') {
+  if (page === 'tweets' && user?.id) {
     APIdata = await prisma.post.findMany({
       where: {
         userId: user.id,
@@ -72,7 +87,7 @@ export const getServerSideProps = async (context) => {
         date: 'desc'
       }
     })
-  } else if (page === 'with-replies') {
+  } else if (page === 'with-replies' && user?.id) {
     APIdata = await prisma.post.findMany({
       where: {
         userId: user.id
@@ -81,7 +96,7 @@ export const getServerSideProps = async (context) => {
         date: 'desc'
       }
     })
-  } else if (page === 'media') {
+  } else if (page === 'media' && user?.id) {
     APIdata = await prisma.post.findMany({
       where: {
         userId: user.id,
@@ -91,7 +106,7 @@ export const getServerSideProps = async (context) => {
         date: 'desc'
       }
     })
-  } else if (page === 'likes') {
+  } else if (page === 'likes' && user?.id) {
     APIdata = await prisma.interaction.findMany({
       where: {
         postUserId: user.id,
