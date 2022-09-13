@@ -192,70 +192,75 @@ const NewTweet = (props) => {
   }, [text, selectedFile, props])
 
   return (
-    <div className="flex flex-row bg-base-100 p-5">
-      <div className="avatar">
-        <div className="h-16 rounded-full">
-          { profile?.avatarImg && <img src={profile.avatarImg} /> }
-        </div>
-      </div>
-      <div className="w-full flex flex-col grid-cols-1 divide-y divide-zinc-700">
-        <div>
-          <textarea
-            value={text}
-            placeholder="What's happening?"
-            className="textarea bg-zinc-1000 text-2xl w-full overflow-hidden h-full text-zinc-0"
-            onChange={(e) => handleTweetInput(e)}
-          />
-        </div>
-        <div>
-          {
-            preview &&
-            <div className="relative flex justify-center">
-              <div
-                className="btn btn-sm btn-circle absolute right-0 top-0 m-1 text-xl backdrop-blur-sm backdrop-contrast-50 text-zinc-0"
-                onClick={handleImageRemove}
-              >
-              <CloseBtn />
+    <>
+      {
+        profile?.id &&
+        <div className="flex flex-row bg-base-100 p-5">
+          <div className="avatar">
+            <div className="h-16 rounded-full">
+              { profile?.avatarImg && <img src={profile.avatarImg} /> }
+            </div>
+          </div>
+          <div className="w-full flex flex-col grid-cols-1 divide-y divide-zinc-700">
+            <div>
+              <textarea
+                value={text}
+                placeholder="What's happening?"
+                className="textarea bg-zinc-1000 text-2xl w-full overflow-hidden h-full text-zinc-0"
+                onChange={(e) => handleTweetInput(e)}
+              />
+            </div>
+            <div>
+              {
+                preview &&
+                <div className="relative flex justify-center">
+                  <div
+                    className="btn btn-sm btn-circle absolute right-0 top-0 m-1 text-xl backdrop-blur-sm backdrop-contrast-50 text-zinc-0"
+                    onClick={handleImageRemove}
+                  >
+                  <CloseBtn />
+                  </div>
+                  <img src={preview} />
+                </div>
+              }
+              {
+                props.postType === 'RETWEET' &&
+                <div className="py-3">
+                  <TinyRetweet postId={props.post.id} />
+                </div>
+
+              }
+
+
+            </div>
+            <div className="flex flex-row justify-between">
+              <div className="p-5">
+                <label onChange={(e) => {
+                  onSelectFile(e)
+                  data.delete('mediaUrl')
+                  data.append('mediaUrl', e.target.files[0])
+                }}
+                >
+                  <ImgUploadBtn />
+                  <input className="hidden" type="file" />
+                </label>
               </div>
-              <img src={preview} />
-            </div>
-          }
-          {
-            props.postType === 'RETWEET' &&
-            <div className="py-3">
-              <TinyRetweet postId={props.post.id} />
-            </div>
-
-          }
-
-
-        </div>
-        <div className="flex flex-row justify-between">
-          <div className="p-5">
-            <label onChange={(e) => {
-              onSelectFile(e)
-              data.delete('mediaUrl')
-              data.append('mediaUrl', e.target.files[0])
-            }}
-            >
-              <ImgUploadBtn />
-              <input className="hidden" type="file" />
-            </label>
-          </div>
-          <div className="flex flex-row p-2 hero-content" htmlFor="TweetModal">
-            {text.length > 0 && <TweetLengthProgress percent={percent} />}
-            <div
-              htmlFor="TweetModal"
-              onClick={() => {
-                buttonActive && handleSubmit(props.postType)
-              }}
-            >
-              { button }
+              <div className="flex flex-row p-2 hero-content" htmlFor="TweetModal">
+                {text.length > 0 && <TweetLengthProgress percent={percent} />}
+                <div
+                  htmlFor="TweetModal"
+                  onClick={() => {
+                    buttonActive && handleSubmit(props.postType)
+                  }}
+                >
+                  { button }
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      }
+    </>
   )
 }
 
