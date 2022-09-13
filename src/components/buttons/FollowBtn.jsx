@@ -5,12 +5,10 @@ import BTN_CLASS from '../../globalVars/btn_class'
 
 import useInteractions from '../../hooks/useInteractions'
 import useProfile from '../../hooks/useProfile'
-import useFollowers from '../../hooks/useFollowers'
 
 const FollowBtn = (props) => {
   const { interactions, newInteraction } = useInteractions()
   const { profile } = useProfile()
-  const { newFollowers } = useFollowers(props.userName)
   const [btnClass, setBtnClass] = useState()
   const [btnText, setBtnText] = useState('')
   const [interaction, setInteraction] = useState([])
