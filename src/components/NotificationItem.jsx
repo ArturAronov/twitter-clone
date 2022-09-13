@@ -35,7 +35,7 @@ const NotificationItem = (props) => {
       <div className="text-sm text-zinc-500">
         { dateFormat }
       </div>
-      {notificationData?.id && <NotificationModal content={notificationData.content} id={notificationData.id} />}
+      {notificationData?.id && <NotificationModal content={notificationData.content} id={notificationData.id} postId={notificationData.postId}/>}
     </label>
   )
 }

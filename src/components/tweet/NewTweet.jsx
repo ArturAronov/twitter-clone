@@ -84,7 +84,7 @@ const NewTweet = (props) => {
       notificationData = {
         ...notificationData,
         receivingUser: props.post.userId,
-        content: `${profile.userName} retweeted your post`
+        content: `${profile.userName} retweeted your post`,
       }
 
 
@@ -97,7 +97,7 @@ const NewTweet = (props) => {
       notificationData = {
         ...notificationData,
         receivingUser: props.post.userId,
-        content: `${profile.userName} replied to your post your post`
+        content: `${profile.userName} replied to your post your post`,
       }
 
       objData = {
@@ -116,7 +116,7 @@ const NewTweet = (props) => {
     let newPostId;
 
     await axios.post('/api/my/posts', data).then(res => newPostId = res.data.id)
-    notificationData?.content && await axios.post('/api/my/notifications/post', notificationData)
+    notificationData?.content && await axios.post('/api/my/notifications/post', notificationData = {...notificationData, postId: newPostId})
     if(postType === 'REPLY'){
       await router.push(`/tweet/${props.post.id}`)
     } else {

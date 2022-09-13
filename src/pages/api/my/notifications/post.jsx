@@ -8,7 +8,8 @@ const handler = nextConnect()
 const userInput = yup.object({
   userId: yup.string().required(),
   content: yup.string().required(),
-  receivingUser: yup.string().required()
+  receivingUser: yup.string().required(),
+  postId: yup.string()
 })
 
 handler
@@ -37,7 +38,8 @@ handler
         data: {
           userId: verifiedInput.userId,
           content: verifiedInput.content,
-          receivingUser: verifiedInput.receivingUser
+          receivingUser: verifiedInput.receivingUser,
+          postId: verifiedInput?.postId && verifiedInput?.postId
         }
       })
 
