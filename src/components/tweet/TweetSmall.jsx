@@ -4,6 +4,7 @@ import moment from 'moment'
 import axios from 'axios'
 
 import TinyRetweet from './TinyRetweet'
+import MoreBtn from '../buttons/MoreBtn'
 
 const TweetSmall = (props) => {
   const [dateFormat, setDateFormat] = useState()
@@ -86,8 +87,9 @@ const TweetSmall = (props) => {
             </div>
           }
         </div>
-      </div>
-      <div className='mx-5'>
+        <div>
+          <MoreBtn postId={props.tweetData.id} user={props.tweetData.userId}/>
+        </div>
       </div>
     </>
   )

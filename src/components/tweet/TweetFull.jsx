@@ -5,6 +5,7 @@ import moment from 'moment'
 import InteractionsBar from './InteractionsBar'
 import TinyRetweet from './TinyRetweet'
 import FollowBtn from '../buttons/FollowBtn'
+import MoreBtn from '../buttons/MoreBtn'
 import TweetModal from '../modals/TweetModal'
 
 const TweetFull = (props) => {
@@ -51,6 +52,9 @@ const TweetFull = (props) => {
           <div className="px-5">
             <FollowBtn id={tweetData.user.id} userName={tweetData.user.userName} />
           </div>
+          <div>
+            <MoreBtn postId={props.tweetData.id} user={props.tweetData.userId} newPage={true}/>
+          </div>
         </div>
         <div className="cursor-pointer" onClick={() => router.push(`/tweet/${tweetData.id}`)}>
           <div className="text-3xl mt-5 px-3">
@@ -86,6 +90,7 @@ const TweetFull = (props) => {
         </div>
         <hr/>
       </div>
+
     </div>
   )
 }
