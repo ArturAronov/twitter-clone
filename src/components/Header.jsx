@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 
 import userInfo from '../hooks/useInfo'
 import useProfile from '../hooks/useProfile'
-import NavbarUserBtn from './buttons/NavbarUserBtn'
 
 import HeaderTitle from './HeaderTitle'
 
