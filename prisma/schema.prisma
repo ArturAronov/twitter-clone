@@ -72,6 +72,7 @@ model Notification {
   id            Int       @id @default(autoincrement())
   userId        String
   receivingUser String
+  postId        String?
   content       String
   sendDate      DateTime  @default(now())
   readDate      DateTime?
