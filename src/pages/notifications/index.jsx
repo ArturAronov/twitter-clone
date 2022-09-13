@@ -2,7 +2,7 @@ import useNotifications from '../../hooks/useNotifications'
 import NotificationItem from '../../components/NotificationItem'
 
 const Notifications = () => {
-  const { notifications, newNotifications } = useNotifications()
+  const { notifications } = useNotifications()
 
   return (
     <div>
