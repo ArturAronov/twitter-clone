@@ -1,7 +1,12 @@
 #
-|Method	|URL			|Auth	|Corresponding File	| Expected Errors	|User Data		| Response													|
-|-------|-----------------------|-------|-----------------------|-----------------------|-----------------------|---------------------------------------------------------------------------------------------------------------|
-|GET	|/api/auth/login	|FALSE	|/api/auth/login.jsx	|406			|email <br/> password	|{<br/>&nbsp;&nbsp;success: true,<br/>&nbsp;&nbsp;message: 'successfully logged in'<br/>}			|
+|Method	|URL                    |Auth	  |Corresponding File	        |Expected Errors  |User Data                                                                    | Response                                                                                                      |
+|-------|-----------------------|-------|---------------------------|-----------------|-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
+|GET	  |/api/auth/login	      |FALSE  |/api/auth/login.jsx	      |406              |email <br/> password	                                                        |{<br/>&nbsp;&nbsp;success: true,<br/>&nbsp;&nbsp;message: 'successfully logged in'<br/>}                       |
+|POST	  |/api/auth/signup	      |FALSE  |/api/auth/signup.jsx	      |406              |name <br/> email <br/> dateOfBirth <br/> password <br/> passwordConfirmation |{<br/>&nbsp;&nbsp;success: true,<br/>&nbsp;&nbsp;message: 'created new user'<br/>}                             |
+|DELETE |/api/auth/logout       |TRUE   |/api/auth/logout.jsx       |406              |NONE                                                                         |{<br/>&nbsp;&nbsp;success: true,<br/>&nbsp;&nbsp;message: 'successfully logged out'<br/>}                      |
+|       |                       |       |                           |                 |                                                                             |                                                                                                               |
+|GET    |/api/my/profile/       |FALSE  |/api/my/profile/index.jsx  |401, 406         |NONE                                                                         |{<br/>&nbsp;&nbsp;"id": String,<br/>&nbsp;&nbsp;"userName": String<br/>&nbsp;&nbsp;"name": String,<br/>&nbsp;&nbsp;"email": String<br/>&nbsp;&nbsp;"bio": String,<br/>&nbsp;&nbsp;"avatarImg": String,<br/>&nbsp;&nbsp;"headerImg": String,<br/>&nbsp;&nbsp;"location": String,<br/>&nbsp;&nbsp;"website": String,<br/>&nbsp;&nbsp;"dateOfBirth": Object,<br/>&nbsp;&nbsp;"joinDate": Object<br/>}<br/>  |
+
 
 
 
