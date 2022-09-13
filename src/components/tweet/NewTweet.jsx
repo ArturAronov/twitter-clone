@@ -115,8 +115,18 @@ const NewTweet = (props) => {
 
     let newPostId;
 
-    await axios.post('/api/my/posts', data).then(res => newPostId = res.data.id)
-    notificationData?.content && await axios.post('/api/my/notifications/post', notificationData = {...notificationData, postId: newPostId})
+    await axios
+      .post('/api/my/posts', data)
+      .then(res => {
+        newPostId = res.data.id
+        notificationData = {
+          ...notificationData,
+          postId: res.data.id
+        }
+      })
+
+    notificationData?.content && await axios.post('/api/my/notifications/post', notificationData)
+
     if(postType === 'REPLY'){
       await router.push(`/tweet/${props.post.id}`)
     } else {
