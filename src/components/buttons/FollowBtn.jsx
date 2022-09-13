@@ -44,7 +44,6 @@ const FollowBtn = (props) => {
   },[interactions])
 
   useEffect(() => {
-    console.log(profile, props.id)
     if (profile?.id && profile.id === props.id) {
       setBtnClass()
       setBtnText('')
