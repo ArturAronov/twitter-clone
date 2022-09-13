@@ -73,8 +73,10 @@ const BookmarkBtn = (props) => {
     <div
       className="cursor-pointer"
       onClick={async () => {
-        await toggleInteraction()
-        await newInteraction()
+        if(profile?.id) {
+          await toggleInteraction()
+          await newInteraction()
+        }
       }}
     >
       {buttonActive}

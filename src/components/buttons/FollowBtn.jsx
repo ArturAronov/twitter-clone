@@ -63,8 +63,10 @@ const FollowBtn = (props) => {
         <div
           className={btnClass}
           onClick={async () => {
-            await toggleInteraction()
-            await newFollowers()
+            if(profile?.id) {
+              await toggleInteraction()
+              await newInteraction()
+            }
           }}
         >
           {btnText}
