@@ -3,7 +3,7 @@
 ### Stack
 <div>
   <img src="https://ui-lib.com/blog/wp-content/uploads/2021/12/nextjs-boilerplate-logo.png" height="100">
-  <img src="https://www.clipartmax.com/png/middle/242-2423721_logo-postgresql.png" height="100">
+  <img src="https://w7.pngwing.com/pngs/358/849/png-transparent-postgresql-database-logo-database-symbol-blue-text-logo-thumbnail.png" height="100">
   <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--In8-nmXa--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3ofe3msqe0bw4p6i9il8.png" height="100">
   <img src="https://www.freelogovectors.net/wp-content/uploads/2022/01/prismalogo-freelogovectors.net_.png" height="100">
   <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-ar21.png" height="100">
