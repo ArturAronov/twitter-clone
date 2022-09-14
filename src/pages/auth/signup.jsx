@@ -152,16 +152,16 @@ const SignUp = () => {
 
         <input
           type="password"
-          placeholder="Password Confirmation"
-          className="input input-bordered w-80 rounded-md bg-zinc-1000 border border-zinc-700 m-1"
-          onChange={(e, input) => handleInput(e, 'passwordConfirmation')}
+          placeholder="Password"
+          className="input input-bordered w-80 rounded-md bg-zinc-1000 border border-zinc-700 m-1 "
+          onChange={(e, input) => handleInput(e, 'password')}
         />
 
         <input
           type="password"
-          placeholder="Password"
-          className="input input-bordered w-80 rounded-md bg-zinc-1000 border border-zinc-700 m-1 "
-          onChange={(e, input) => handleInput(e, 'password')}
+          placeholder="Password Confirmation"
+          className="input input-bordered w-80 rounded-md bg-zinc-1000 border border-zinc-700 m-1"
+          onChange={(e, input) => handleInput(e, 'passwordConfirmation')}
         />
 
         <div className="text-sm text-red-600 mb-5">
