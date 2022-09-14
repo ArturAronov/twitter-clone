@@ -1,17 +1,19 @@
 # Full Stack Twitter Clone
 
 ### Stack
-<img src="https://ui-lib.com/blog/wp-content/uploads/2021/12/nextjs-boilerplate-logo.png" height="100">
-<img src="https://w7.pngwing.com/pngs/441/460/png-transparent-postgresql-plain-wordmark-logo-icon-thumbnail.png" height="100">
-<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--In8-nmXa--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3ofe3msqe0bw4p6i9il8.png" height="100">
-<img src="https://www.freelogovectors.net/wp-content/uploads/2022/01/prismalogo-freelogovectors.net_.png" height="100">
-<img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-ar21.png" height="100">
-<img src="https://user-images.githubusercontent.com/7342023/101421491-a0313380-3909-11eb-8dd6-6037753af051.png" height="100">
-<img src="https://logovtor.com/wp-content/uploads/2020/10/vercel-inc-logo-vector.png" height="100">
-<img src="https://getlogo.net/wp-content/uploads/2020/11/supabase-logo-vector.png" height="100">
-<img src="https://www.zencos.com/wp-content/uploads/2021/11/aws-logo.png" height="100">
-<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--iBf9O9OS--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://dev-to-uploads.s3.amazonaws.com/i/9ngdmhfexbyafu2p5cll.png" height="100">
-<img src="https://www.drupal.org/files/project-images/moment.png" height="100">
+<div>
+  <img src="https://ui-lib.com/blog/wp-content/uploads/2021/12/nextjs-boilerplate-logo.png" height="100">
+  <img src="https://w7.pngwing.com/pngs/441/460/png-transparent-postgresql-plain-wordmark-logo-icon-thumbnail.png" height="100">
+  <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--In8-nmXa--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/3ofe3msqe0bw4p6i9il8.png" height="100">
+  <img src="https://www.freelogovectors.net/wp-content/uploads/2022/01/prismalogo-freelogovectors.net_.png" height="100">
+  <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-ar21.png" height="100">
+  <img src="https://user-images.githubusercontent.com/7342023/101421491-a0313380-3909-11eb-8dd6-6037753af051.png" height="100">
+  <img src="https://logovtor.com/wp-content/uploads/2020/10/vercel-inc-logo-vector.png" height="100">
+  <img src="https://getlogo.net/wp-content/uploads/2020/11/supabase-logo-vector.png" height="100">
+  <img src="https://www.zencos.com/wp-content/uploads/2021/11/aws-logo.png" height="100">
+  <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--iBf9O9OS--/c_imagga_scale,f_auto,fl_progressive,h_1080,q_auto,w_1080/https://dev-to-uploads.s3.amazonaws.com/i/9ngdmhfexbyafu2p5cll.png" height="100">
+  <img src="https://www.drupal.org/files/project-images/moment.png" height="100">
+</div>
 
 ### Deployment
 - Vercel
