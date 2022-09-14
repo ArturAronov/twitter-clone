@@ -5,10 +5,16 @@ import BTN_CLASS from '../../globalVars/btn_class'
 
 import useInteractions from '../../hooks/useInteractions'
 import useProfile from '../../hooks/useProfile'
+import useFollowers from '../../hooks/useFollowers'
+import useFollowing from '../../hooks/useFollowing'
 
 const FollowBtn = (props) => {
+  const [userName, setUserName] = useState()
+  const [profileUserName, setProfileUserName] = useState()
   const { interactions, newInteraction } = useInteractions()
   const { profile } = useProfile()
+  const { newFollowers } = useFollowers(userName)
+  const { newFollowing } = useFollowing(profileUserName)
   const [btnClass, setBtnClass] = useState()
   const [btnText, setBtnText] = useState('')
   const [interaction, setInteraction] = useState([])
@@ -20,7 +26,6 @@ const FollowBtn = (props) => {
       actionType: 'FOLLOW',
     }
     await axios.put('/api/my/interaction', data)
-    await newInteraction()
   }
 
   const getData = async () => {
@@ -35,10 +40,15 @@ const FollowBtn = (props) => {
 
   useEffect(() => {
     getData()
+
+    if(profile?.userName) {
+      setProfileUserName(profile.userName)
+    }
   },[])
 
   useEffect(() => {
     getData()
+    axios.get('/api/usersId/'+props.id).then(res => setUserName(res.data.userName))
   },[interactions])
 
   useEffect(() => {
@@ -46,8 +56,15 @@ const FollowBtn = (props) => {
       setBtnClass()
       setBtnText('')
     } else if (interaction.length > 0) {
-      setBtnClass(BTN_CLASS.darkWarningHover)
-      setBtnText('Unfollow')
+      setBtnClass(BTN_CLASS.primary)
+      setBtnText('Follow')
+      interaction.map(element => {
+        if(element.interactionUserId === props.id){
+          setBtnClass(BTN_CLASS.darkWarningHover)
+          setBtnText('Unfollow')
+        }
+      })
+
     } else {
       setBtnClass(BTN_CLASS.primary)
       setBtnText('Follow')
@@ -64,6 +81,8 @@ const FollowBtn = (props) => {
             if(profile?.id) {
               await toggleInteraction()
               await newInteraction()
+              await newFollowers()
+              await newFollowing()
             }
           }}
         >

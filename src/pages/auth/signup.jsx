@@ -168,7 +168,7 @@ const SignUp = () => {
           { errorMessage }
         </div>
         <div className={BTN_CLASS.dark} onClick={() => handleSubmit()}>
-          Login
+          Sign Up
         </div>
       </div>
     </div>

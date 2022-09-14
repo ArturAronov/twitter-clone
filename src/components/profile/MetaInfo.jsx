@@ -31,7 +31,6 @@ const MetaInfo = (props) => {
           className="cursor-pointer text-sky-500 pl-1"
         >
           { website.split('://').filter(element => element !== ('http' || 'https')).join('') }
-          {/* { props.website.split('http://www.')[1] } */}
         </a>
       </div>
       ) }
