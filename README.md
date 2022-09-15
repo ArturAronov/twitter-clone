@@ -3,6 +3,9 @@
 ### Deployed Site
 https://twitter-clone-arturaronov.vercel.app/
 
+### Presentation
+https://www.youtube.com/watch?v=6ZmivtrDOEU
+
 ### Stack
 <div>
   <img src="https://ui-lib.com/blog/wp-content/uploads/2021/12/nextjs-boilerplate-logo.png" height="100">
